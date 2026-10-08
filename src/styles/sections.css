@@ -388,9 +388,9 @@
 }
 .skills .display {
   font-size: clamp(58px, 6.1vw, 115px);
-  paint-order: stroke fill;
-  -webkit-text-stroke: 3px var(--cream);
-  text-shadow: 3px 4px 0 #13151a66;
+  text-shadow:
+    4px 4px 0 var(--cream),
+    0 2px 8px #f7ebc980;
 }
 .section-heading .script {
   font-size: 26px;
@@ -596,6 +596,7 @@
 }
 .projects-heading .display {
   font-size: clamp(60px, 6.5vw, 115px);
+  text-shadow: 4px 4px 0 #16121f;
 }
 .projects-heading > p {
   font-size: 13px;
