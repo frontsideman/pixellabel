@@ -601,6 +601,13 @@
   font-weight: 600;
   margin-top: 22px;
   line-height: 1.5;
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 14px;
+  border-radius: 3px;
+  background: #13151acc;
+  color: var(--cream);
+  text-shadow: none;
 }
 .projects-heading .script {
   color: var(--ink);
