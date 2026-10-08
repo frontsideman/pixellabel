@@ -51,7 +51,7 @@ try {
   await page.keyboard.press('Escape');
   check('Project dialog Escape restores focus', await page.locator('[data-project="auto"] .project-open').evaluate(e=>e===document.activeElement));
   await page.locator('.menu-toggle').click();
-  check('Menu opens and locks document scrolling', await page.locator('#menu').evaluate(e=>e.open) && await page.locator('body').evaluate(e=>e.classList.contains('menu-open')));
+  check('Menu opens and locks document scrolling', await page.locator('#menu').evaluate(e=>e.open) && await page.locator('body').evaluate(e=>e.classList.contains('scroll-locked')));
   await page.locator('#menu a[href="#skills"]').focus(); await page.waitForTimeout(750);
   check('Keyboard focus changes menu artwork and palette', await page.locator('#menu').evaluate(e=>e.style.getPropertyValue('--menu-color')==='#abeb7a') && await page.locator('#menu .menu-image.active').evaluate(e=>e.src===document.querySelector('#skills .section-background img').src));
   await page.keyboard.press('Escape');

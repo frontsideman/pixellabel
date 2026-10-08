@@ -18,7 +18,7 @@ npm run build
 npm run preview
 ```
 
-The production site is in `dist/`. Serve that entire directory from any static web host. `base: './'` supports hosting under a subdirectory. Each build generates self-contained `index.html` and `portfolio.html` files in the project root and in `dist/`, with embedded artwork, fonts, CSS and JavaScript. Open any of these files directly by double-clicking; no server or redirect is needed. The root `index.html` is committed so a clone or a static host can open the portfolio immediately. Rebuild after editing source files to refresh these outputs.
+The production site is in `dist/`. Serve that entire directory from any static web host. `base: './'` supports hosting under a subdirectory. Each build generates self-contained `index.html` and `portfolio.html` files in the project root and in `dist/`, with embedded artwork, fonts, CSS and JavaScript. Open any of these files directly by double-clicking; no server or redirect is needed. The root `index.html` is committed so a clone or a static host can open the portfolio immediately. The four output files intentionally have identical contents: index.html is the default entry for hosting or opening locally, and portfolio.html is the same standalone artifact under a descriptive name for sharing. Only edit src/index.html and source modules; rebuild to refresh all four outputs.
 
 ## Included interactions
 
@@ -58,3 +58,5 @@ The QA script verifies project/navigation dialogs, focus restoration, panorama e
 See `ASSETS.md` for provenance, dimensions and font licenses. Exported WebP/SVG/WOFF2 files are included; no asset-generation service is needed to run the site. `scripts/prepare-*.cjs` are creation-session export helpers and refer to the original generated source files in this computer's Codex image directory; they are not build prerequisites.
 
 The supplied [CodePen](https://codepen.io/jh3y/pen/MYgaaem) was inspected. It demonstrates scroll-driven list brightening and hue progression, rather than the pointer-letter interaction described in the brief. The portfolio includes an original heading-proximity effect and scroll-progress milestone emphasis; it does not claim to copy a nonexistent pointer demo. [Metalab](https://www.metalab.com/) was inspected for the navigation direction; the menu implementation here is original.
+
+Menus and project dialogs share owner-based scroll locking in src/scripts/scroll-lock.js; closing one dialog cannot release a lock held by another. The hero ground-shade layer is a static CSS contrast gradient, not another parallax image.

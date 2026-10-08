@@ -1,3 +1,5 @@
+import { lockScroll, unlockScroll } from './scroll-lock.js';
+
 const projects = {
   consensus: { title: 'Consensus', category: '01 / B2B SaaS · SpiralScout', asset: 'consensus', description: 'Frontend development for the Consensus B2B SaaS demo automation platform at SpiralScout. Built and maintained the web application, Chrome extension and Outlook iframe integrations. Work included new features, REST API integration, release preparation, and unit and integration tests.', stack: ['React', 'Redux', 'React Query', 'TypeScript', 'Storybook', 'Jest'] },
   allergenchecker: { title: 'AllergenChecker', category: '02 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
@@ -106,10 +108,10 @@ export function setupProjectDialogs() {
     if (data.url) visit.href = data.url;
     else visit.removeAttribute('href');
     dialog.showModal();
-    document.body.classList.add('menu-open');
+    lockScroll(dialog);
   }));
   dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if(event.target === dialog) { const r = dialog.getBoundingClientRect(); if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close(); } });
-  dialog.addEventListener('close', () => { document.body.classList.remove('menu-open'); returnFocus?.focus({preventScroll:true}); });
+  dialog.addEventListener('close', () => { unlockScroll(dialog); returnFocus?.focus({preventScroll:true}); });
   window.addEventListener('popstate', () => { if(dialog.open) dialog.close(); });
 }

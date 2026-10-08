@@ -1,3 +1,5 @@
+import { lockScroll, unlockScroll } from './scroll-lock.js';
+
 const worlds = {
   home: ['hero', '#ffcc86'], about: ['about', '#56d1c8'], skills: ['skills', '#abeb7a'],
   projects: ['projects', '#fc8ac1'], experience: ['experience', '#ffd166'],
@@ -8,11 +10,11 @@ export function setupNavigation() {
   const toggle = document.querySelector('.menu-toggle');
   const images = [...dialog.querySelectorAll('.menu-image')];
   let front = 0, request = 0, focusReturn;
-  const open = () => { focusReturn = document.activeElement; dialog.showModal(); document.body.classList.add('menu-open'); toggle.setAttribute('aria-expanded', 'true'); };
+  const open = () => { focusReturn = document.activeElement; dialog.showModal(); lockScroll(dialog); toggle.setAttribute('aria-expanded', 'true'); };
   const close = () => dialog.close();
   toggle.addEventListener('click', open);
   dialog.querySelector('.menu-close').addEventListener('click', close);
-  dialog.addEventListener('close', () => { document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', 'false'); focusReturn?.focus({ preventScroll: true }); });
+  dialog.addEventListener('close', () => { unlockScroll(dialog); toggle.setAttribute('aria-expanded', 'false'); focusReturn?.focus({ preventScroll: true }); });
   for(const link of dialog.querySelectorAll('nav a')) {
     const theme = () => {
       const [asset, color] = worlds[link.dataset.menuTheme];

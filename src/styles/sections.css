@@ -24,7 +24,6 @@
 }
 .parallax-layer {
   transform: translate3d(var(--px, 0px), var(--py, 0px), 0);
-  will-change: auto;
 }
 .hero-shade {
   position: absolute;
@@ -227,7 +226,7 @@
   filter: drop-shadow(2px 3px 0 #1c203d);
   opacity: 0.95;
 }
-.foreground {
+.hero-ground-shade {
   position: absolute;
   inset: auto -5% -9% -5%;
   height: 18%;

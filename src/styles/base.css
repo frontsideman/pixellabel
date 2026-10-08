@@ -46,7 +46,7 @@ body {
   line-height: 1.45;
   overflow-x: clip;
 }
-body.menu-open {
+body.scroll-locked {
   overflow: hidden;
 }
 button,

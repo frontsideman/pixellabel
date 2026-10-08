@@ -111,3 +111,9 @@ Added an 80% opaque dark panel with cream text for the Skills script caption. Te
 ### Career route reading pace
 
 The yellow career route now tracks its actual SVG length at 40% of the viewport, and each stop activates only when its real marker reaches that reading position. It no longer completes within 65% of the overall Experience section. The 500ms transition remains. Production build and targeted mobile/desktop checks passed: first/fourth/eighth stops activate individually, and the fourth stop leaves the route around 41–43% drawn rather than prematurely complete. No document overflow at 375/1296px.
+
+### Decorative layer and shared scroll locking
+
+Removed the no-op will-change declaration. The former foreground layer is a visible CSS gradient, now named hero-ground-shade and kept static without a duplicate parallax depth. Menu and project dialogs share owner-based scroll locking. README explicitly documents the four intentionally identical standalone outputs. Independent scroll handlers remain unchanged.
+
+Production build and all 45 browser checks passed with no runtime errors or failed assets. A targeted Chrome check confirmed that releasing one of two scroll-lock owners keeps scrolling blocked until the last owner releases it.
