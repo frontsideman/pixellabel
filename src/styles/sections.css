@@ -388,9 +388,7 @@
 }
 .skills .display {
   font-size: clamp(58px, 6.1vw, 115px);
-  text-shadow:
-    4px 4px 0 var(--cream),
-    0 2px 8px #f7ebc980;
+  text-shadow: 2px 2px 0 #f7ebc9b3;
 }
 .section-heading .script {
   font-size: 26px;
