@@ -1,0 +1,113 @@
+const projects = {
+  consensus: { title: 'Consensus', category: '01 / B2B SaaS · SpiralScout', asset: 'consensus', description: 'Frontend development for the Consensus B2B SaaS demo automation platform at SpiralScout. Built and maintained the web application, Chrome extension and Outlook iframe integrations. Work included new features, REST API integration, release preparation, and unit and integration tests.', stack: ['React', 'Redux', 'React Query', 'TypeScript', 'Storybook', 'Jest'] },
+  allergenchecker: { title: 'AllergenChecker', category: '02 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
+  competition: { title: 'Competition', category: '03 / iOS application', asset: 'competitions', description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
+  aibook: { title: 'AIBook', category: '04 / Product development', asset: 'aibook', description: 'Created AIBook.', stack: ['Product development'] },
+  corporate: { title: 'Corporate & marketing website', category: '05 / Website and blog', asset: 'corporate', description: 'Built a corporate and marketing website with a blog using Nuxt and Directus. The site combines its corporate presence and marketing content with a CMS-backed blog.', stack: ['Nuxt', 'Directus', 'Blog', 'CMS'] },
+  bixbit: { title: 'Bixbit', category: '06 / Website migration', asset: 'bixbit', description: 'Website migration to Nuxt and Directus, with a multilingual content structure, CMS integration and technical SEO. A maintainable foundation for managing and delivering content.', stack: ['Nuxt', 'Directus', 'Multilingual', 'SEO'] },
+  youtube: { title: 'YouTube Skip', category: '07 / Chrome extension', asset: 'youtube', description: 'A JavaScript Chrome extension project focused on the video-viewing experience. A compact browser-based tool built around a specific everyday interaction.', stack: ['JavaScript', 'Chrome extension'] },
+  auto: { title: 'BestAutoService.by', category: '08 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design'], url: 'https://bestautoservice.by/' }
+};
+export class HorizontalProjects {
+  constructor(preferences) {
+    this.preferences = preferences;
+    this.section = document.querySelector('#projects');
+    this.stage = this.section.querySelector('.projects-stage');
+    this.viewport = this.section.querySelector('.project-viewport');
+    this.track = this.section.querySelector('.project-track');
+    this.cards = [...this.track.children];
+    this.previous = this.section.querySelector('[data-project-prev]');
+    this.next = this.section.querySelector('[data-project-next]');
+    this.count = this.section.querySelector('.project-count');
+    this.media = matchMedia('(min-width: 1024px) and (pointer: fine)');
+    this.index = 0; this.pending = false;
+    this.previous.addEventListener('click', () => this.go(this.index - 1));
+    this.next.addEventListener('click', () => this.go(this.index + 1));
+    this.viewport.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); this.go(this.index + (event.key === 'ArrowRight' ? 1 : -1)); }
+    });
+    this.viewport.addEventListener('focusin', event => { const card=event.target.closest('.project-card'); if(card && event.target.matches(':focus-visible')) this.go(this.cards.indexOf(card)); });
+    this.viewport.addEventListener('scroll', () => { if(!this.pinned) this.updateNative(); }, {passive:true});
+    window.addEventListener('scroll', () => this.schedule(), {passive:true});
+    this.media.addEventListener('change', () => this.measure());
+    preferences.addEventListener('change', () => this.measure());
+    new ResizeObserver(() => this.measure()).observe(this.viewport);
+    document.fonts.ready.then(() => this.measure());
+    this.track.querySelectorAll('img').forEach(image => image.addEventListener('load', () => this.measure()));
+    this.measure();
+  }
+  measure() {
+    this.pinned = this.media.matches && !this.preferences.reduced;
+    this.section.classList.toggle('is-pinned', this.pinned);
+    this.distance = Math.max(0, this.track.scrollWidth - this.viewport.clientWidth);
+    this.step = this.cards[1].offsetLeft - this.cards[0].offsetLeft;
+    if(this.pinned) {
+      this.viewport.scrollLeft = 0;
+      this.section.style.height = `${this.stage.offsetHeight + this.distance}px`;
+    } else {
+      this.section.style.height = '';
+      this.track.style.removeProperty('--project-x');
+      this.stage.style.removeProperty('--panorama-x');
+      this.viewport.scrollLeft = Math.min(this.index * this.step, this.distance);
+    }
+    this.update();
+  }
+  schedule() {
+    if (!this.pinned || this.pending) return;
+    this.pending = true;
+    requestAnimationFrame(() => { this.pending = false; this.update(); });
+  }
+  update() {
+    if(!this.pinned) { this.updateNative(); return; }
+    const top = this.section.getBoundingClientRect().top;
+    const distance = Math.min(this.distance, Math.max(0, -top));
+    this.track.style.setProperty('--project-x', `${-distance}px`);
+    this.stage.style.setProperty('--panorama-x', `${-distance * .025}px`);
+    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, Math.round(distance / this.step)), this.distance ? distance / this.distance : 0);
+  }
+  updateNative() {
+    const distance = this.viewport.scrollLeft;
+    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, Math.round(distance / this.step)), this.distance ? distance / this.distance : 0);
+  }
+  setIndex(index, progress) {
+    this.index = index;
+    const text = `${String(index + 1).padStart(2,'0')} / ${String(this.cards.length).padStart(2,'0')}`;
+    if(this.count.textContent !== text) this.count.textContent = text;
+    this.previous.disabled = index === 0;
+    this.next.disabled = index === this.cards.length - 1;
+    const indicator = this.section.querySelector('.project-progress span');
+    indicator.style.width = `${100 / this.cards.length}%`;
+    indicator.style.setProperty('--progress-x', `${Math.max(0,Math.min(1,progress))*(this.cards.length-1)*100}%`);
+  }
+  go(index) {
+    index = Math.max(0, Math.min(this.cards.length-1,index));
+    const distance = index === this.cards.length-1 ? this.distance : Math.min(this.distance,index*this.step);
+    if(this.pinned) {
+      const y = this.section.getBoundingClientRect().top + scrollY + distance;
+      window.scrollTo({top:y,behavior:this.preferences.reduced?'instant':'smooth'});
+    } else this.viewport.scrollTo({left:distance,behavior:this.preferences.reduced?'instant':'smooth'});
+  }
+}
+export function setupProjectDialogs() {
+  const dialog = document.querySelector('#project-dialog');
+  let returnFocus;
+  document.querySelectorAll('.project-open').forEach(button => button.addEventListener('click', () => {
+    const data = projects[button.closest('[data-project]').dataset.project];
+    returnFocus = button;
+    dialog.querySelector('#project-dialog-title').textContent = data.title;
+    dialog.querySelector('.dialog-category').textContent = data.category;
+    dialog.querySelector('.dialog-description').textContent = data.description;
+    dialog.querySelector('.dialog-art').src = `${import.meta.env.BASE_URL}artwork/${data.asset}.webp`;
+    dialog.querySelector('.dialog-tags').replaceChildren(...data.stack.map(tag => { const span = document.createElement('span'); span.textContent = tag; return span; }));
+    const visit = dialog.querySelector('.dialog-visit');
+    visit.hidden = !data.url;
+    if (data.url) visit.href = data.url;
+    else visit.removeAttribute('href');
+    dialog.showModal();
+    document.body.classList.add('menu-open');
+  }));
+  dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if(event.target === dialog) { const r = dialog.getBoundingClientRect(); if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close(); } });
+  dialog.addEventListener('close', () => { document.body.classList.remove('menu-open'); returnFocus?.focus({preventScroll:true}); });
+  window.addEventListener('popstate', () => { if(dialog.open) dialog.close(); });
+}
