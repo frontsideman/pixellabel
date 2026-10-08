@@ -389,10 +389,22 @@
 }
 .skills .display {
   font-size: clamp(58px, 6.1vw, 115px);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 3px var(--cream);
+  text-shadow: 3px 4px 0 #13151a66;
 }
 .section-heading .script {
   font-size: 26px;
   margin-top: 25px;
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  padding: 12px 16px;
+  border-radius: 3px;
+  color: var(--cream);
+  background: #13151acc;
+  box-shadow: 4px 5px 0 #13151a35;
+  line-height: 1.15;
 }
 .skill-groups {
   display: grid;

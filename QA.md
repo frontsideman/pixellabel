@@ -103,3 +103,7 @@ Added original AS favicon SVG/ICO/PNG variants and JPEG hero sharing artwork. Ca
 Carousel measurement handles zero/single cards without indexing or division errors; progress DOM lookup is cached. Letter centers invalidate on scroll/resize and remeasure on the next pointer movement. Service articles no longer add inactive keyboard tab stops. Node >=20.19 is declared in engines. CSS is formatted and split into three files preserving cascade order; replaced text-glyph rules were removed. Metadata labels are at least 11px, technology labels 12px, and the mobile technology grid uses two columns per group.
 
 Production build and all 45 existing checks passed. qa:review passed on dev and production for social metadata, four branding asset responses, service semantics and type sizes/overflow at 320/375/768/1296px; zero/one-card initialization, resize and motion toggle; heading hover after scroll/resize; and removal of obsolete glyph rules. No JavaScript errors occurred.
+
+### Skills contrast refinement
+
+Added an 80% opaque dark panel with cream text for the Skills script caption. Tech Stack now has a 3px cream outline and a soft offset shadow. Production and standalone builds passed; targeted checks at 320/375/768/1296/1920px confirmed the panel, outline and no document overflow. Desktop and mobile screenshots were visually reviewed.
