@@ -107,3 +107,7 @@ Production build and all 45 existing checks passed. qa:review passed on dev and 
 ### Skills contrast refinement
 
 Added an 80% opaque dark panel with cream text for the Skills script caption. Tech Stack now has a 3px cream outline and a soft offset shadow. Production and standalone builds passed; targeted checks at 320/375/768/1296/1920px confirmed the panel, outline and no document overflow. Desktop and mobile screenshots were visually reviewed.
+
+### Career route reading pace
+
+The yellow career route now tracks its actual SVG length at 40% of the viewport, and each stop activates only when its real marker reaches that reading position. It no longer completes within 65% of the overall Experience section. The 500ms transition remains. Production build and targeted mobile/desktop checks passed: first/fourth/eighth stops activate individually, and the fourth stop leaves the route around 41–43% drawn rather than prematurely complete. No document overflow at 375/1296px.

@@ -156,9 +156,15 @@ export function setupScrollScenes(preferences) {
     }
     const r=experience.getBoundingClientRect();
     if(r.top<innerHeight&&r.bottom>0){
-      const progress=Math.max(0,Math.min(1,(innerHeight*.72-r.top)/(r.height*.65)));
+      // Follow the real route length at the reading position, rather than
+      // completing the timeline early within a fraction of the section.
+      const bounds=route.ownerSVGElement.getBoundingClientRect();
+      const readingY=innerHeight*.4;
+      const start=bounds.top+bounds.height*.02;
+      const length=bounds.height*.96;
+      const progress=length ? Math.max(0,Math.min(1,(readingY-start)/length)) : 0;
       route.style.strokeDashoffset=preferences.reduced?'0':String(1-progress);
-      stops.forEach((stop,i)=>stop.classList.toggle('is-active',preferences.reduced||progress>i/(stops.length-1)));
+      stops.forEach(stop=>stop.classList.toggle('is-active',preferences.reduced||stop.getBoundingClientRect().top+14<=readingY+1));
     }
   };
   const schedule=()=>{if(!pending){pending=true;requestAnimationFrame(update);}};
