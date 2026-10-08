@@ -19,13 +19,18 @@ export function setupInteractiveText(preferences) {
     });
     let centers=[],pending=false,point;
     const chars = [...heading.querySelectorAll('.char')];
-    heading.addEventListener('pointerenter', () => { centers=chars.map(char=>{const r=char.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};}); });
+    const measureCenters = () => chars.map(char=>{const r=char.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};});
+    const invalidateCenters = () => { centers = []; };
+    heading.addEventListener('pointerenter', () => { centers = measureCenters(); });
+    window.addEventListener('scroll', invalidateCenters, {passive:true});
+    window.addEventListener('resize', invalidateCenters, {passive:true});
     heading.addEventListener('pointermove',event=>{
       if(preferences.reduced || !fine.matches) return;
       point={x:event.clientX,y:event.clientY};
       if(pending) return;pending=true;
       requestAnimationFrame(()=>{
         pending=false;
+        if (!centers.length) centers = measureCenters();
         chars.forEach((char,i)=>{
           const c=centers[i];if(!c)return;
           const proximity=Math.max(0,1-Math.hypot(point.x-c.x,point.y-c.y)/100);

@@ -1,7 +1,7 @@
-import {readFile,writeFile,readdir} from 'node:fs/promises';
+import {readFile,writeFile,readdir,copyFile} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 const dist=resolve('dist');
-const types={'.webp':'image/webp','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2'};
+const types={'.webp':'image/webp','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2','.ico':'image/x-icon'};
 const cache=new Map();
 async function embed(path){const file=resolve(dist,path);if(!cache.has(file)){const bytes=await readFile(file);cache.set(file,`data:${types[extname(file)]};base64,${bytes.toString('base64')}`);}return cache.get(file);}
 const files=await readdir(resolve(dist,'assets'));
@@ -17,7 +17,12 @@ if(js.includes('`./artwork/'))throw new Error('Unresolved dynamic artwork path')
 js=`const portfolioArtwork=${JSON.stringify(artwork)};\n${js}`;
 html=html.replace(/<script type="module"[^>]*src="[^"]+"[^>]*><\/script>/,'').replace(/<link rel="stylesheet"[^>]+>/,`<style>${css}</style>`);
 for(const path of new Set([...html.matchAll(/\.\/(?:artwork|icons|fonts)\/[a-zA-Z0-9_./-]+\.(?:webp|svg|woff2)/g)].map(m=>m[0]))){html=html.replaceAll(path,await embed(path));}
-html=html.replace('./favicon.svg',await embed('favicon.svg'));
+for(const name of ['favicon.svg','favicon.ico','apple-touch-icon.png']){
+  html=html.replaceAll(`./${name}`,await embed(name));
+}
+for(const name of ['favicon.svg','favicon.ico','favicon-32.png','apple-touch-icon.png','og-image.jpg']){
+  await copyFile(resolve(dist,name),resolve(name));
+}
 html=html.replace('</body>',`<script>${js.replaceAll('</script','<\\/script')}</script>\n</body>`);
 html=html.replace(/^[\t ]+$/gm,'');
 await writeFile('index.html',html);

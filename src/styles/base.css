@@ -1,0 +1,306 @@
+/* Fonts, tokens, resets and shared components. */
+@font-face {
+  font-family: Anton;
+  src: url("/fonts/anton.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/dm-sans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Caveat;
+  src: url("/fonts/caveat.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+}
+:root {
+  --ink: #13151a;
+  --cream: #f7ebc9;
+  --pink: #ef579b;
+  --yellow: #ffda77;
+  --teal: #31c5c9;
+  --page-pad: clamp(24px, 5.3vw, 100px);
+  --display: Anton, "Arial Narrow", Impact, sans-serif;
+  --body: "DM Sans", Arial, sans-serif;
+  --motion-speed: 1;
+  --sky-color: #ff648f;
+  --line: rgba(19, 21, 26, 0.22);
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-x: clip;
+}
+body.menu-open {
+  overflow: hidden;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  color: inherit;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+button {
+  border: 0;
+}
+a,
+button {
+  -webkit-touch-callout: default;
+}
+::selection {
+  color: var(--ink);
+  background: var(--yellow);
+}
+:focus-visible {
+  outline: 3px solid #fb7cba;
+  outline-offset: 6px;
+}
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  left: 15px;
+  top: -80px;
+  z-index: 100;
+  background: var(--yellow);
+  padding: 14px 20px;
+}
+.skip-link:focus {
+  top: 15px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  margin-bottom: 18px;
+}
+.display {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: clamp(52px, 5.4vw, 100px);
+  line-height: 1.01;
+  letter-spacing: -0.015em;
+}
+.script {
+  font-family: Caveat, cursive;
+  font-size: clamp(26px, 3vw, 48px);
+  line-height: 0.92;
+  display: block;
+  transform: rotate(-7deg);
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 52px;
+  padding: 16px 25px;
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 0 #13151a30;
+  position: relative;
+  isolation: isolate;
+  transition:
+    box-shadow var(--motion-duration),
+    background var(--motion-duration);
+}
+.button span {
+  font-size: 23px;
+  line-height: 0.5;
+  transition: transform var(--motion-duration);
+}
+.button:hover {
+  background: #ffe6a6;
+  box-shadow: 0 6px 20px #ffd16630;
+}
+.button:hover span {
+  transform: translate(3px, -3px);
+}
+.rim:before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  background: linear-gradient(
+    110deg,
+    #ffc657,
+    #e587de,
+    #48d8d4,
+    #ff6e94,
+    #ffc657
+  );
+  background-size: 350% 100%;
+  border-radius: inherit;
+  animation: gradient-rim 9s linear infinite;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+.paper {
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2346311d' opacity='.1'%3E%3Ccircle cx='4' cy='7' r='.6'/%3E%3Ccircle cx='19' cy='5' r='.5'/%3E%3Ccircle cx='12' cy='18' r='.7'/%3E%3Ccircle cx='29' cy='25' r='.6'/%3E%3Ccircle cx='5' cy='31' r='.6'/%3E%3C/g%3E%3C/svg%3E");
+  position: relative;
+}
+.section-cut {
+  margin-top: -30px;
+  padding-top: 70px;
+  clip-path: polygon(0 0, 100% 30px, 100% 100%, 0 100%);
+}
+.scene {
+  position: relative;
+  overflow: hidden;
+}
+.site-header {
+  height: 78px;
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--page-pad);
+  gap: 30px;
+  z-index: 20;
+  color: var(--cream);
+  transition:
+    background var(--motion-duration),
+    box-shadow var(--motion-duration);
+}
+.site-header.is-scrolled {
+  position: fixed;
+  height: 66px;
+  background: #13151acc;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 #f7ebc922;
+}
+.wordmark {
+  font-family: var(--display);
+  font-size: 33px;
+  letter-spacing: -1px;
+  line-height: 1;
+  position: relative;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.1vw, 36px);
+  margin-left: auto;
+}
+.desktop-nav a {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  position: relative;
+  padding: 15px 0;
+}
+.desktop-nav a:after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--yellow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-duration);
+}
+.desktop-nav a:hover:after,
+.desktop-nav a[aria-current]:after {
+  transform: scaleX(1);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header-talk {
+  background: var(--ink);
+  border: 1px solid #f7ebc93a;
+  border-radius: 3px;
+  padding: 9px 15px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.header-talk span {
+  margin-left: 15px;
+}
+.menu-toggle {
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.menu-toggle span {
+  height: 2px;
+  width: 23px;
+  background: currentColor;
+  transition: width var(--motion-duration);
+}
+.menu-toggle:hover span:last-child {
+  width: 15px;
+}

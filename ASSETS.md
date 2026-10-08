@@ -58,3 +58,7 @@ No essential copy is baked into imagery. Responsive picture sources, image dimen
 - TanStack: https://tanstack.com/images/brand/social/naked-mark-ocean.svg
 - AWS: https://github.com/devicons/devicon/blob/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg
 - Service icons: npm `lucide-static` (`code-xml`, `panels-top-left`, `network`, `users-round`, `rocket`, `gauge`), https://lucide.dev/
+
+### Favicon and social sharing assets
+
+The favicon is an original SVG AS monogram in the portfolio palette. Browser-rendered PNG exports provide 32px and 180px Apple touch variants; the ICO contains 16px and 32px sizes. og-image.jpg is a 1200×630 browser-rendered JPEG export of the existing original hero illustration. The standalone builder embeds icon resources and copies public branding assets into the repository root for hosting alongside index.html.

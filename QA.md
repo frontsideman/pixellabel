@@ -95,3 +95,11 @@ Preserved origin/main history and the existing CNAME for pixellabel.com. The Vit
 An isolated copy of index.html in /private/tmp passed in installed Chrome and Playwright WebKit: URL unchanged, all non-dialog images and fonts loaded, all eight project dialogs loaded their images, and parallax worked with system reduced motion. HTTP production preview passed the same checks. The navigation artwork assertion was updated to compare the actual image against the Skills image, supporting both normal URLs and embedded data URIs.
 
 Final production validation: all 45 browser checks passed, with no runtime errors or failed local assets. Idle profiling was skipped.
+
+### Favicon, metadata and implementation review
+
+Added original AS favicon SVG/ICO/PNG variants and JPEG hero sharing artwork. Canonical and og:url target https://pixellabel.com/ from CNAME; Open Graph/Twitter metadata includes a 1200×630 image. Dev favicon paths are absolute. Builds embed icons and copy branding assets to the repository root so both Vite output and repository-root hosting expose the same social image URL.
+
+Carousel measurement handles zero/single cards without indexing or division errors; progress DOM lookup is cached. Letter centers invalidate on scroll/resize and remeasure on the next pointer movement. Service articles no longer add inactive keyboard tab stops. Node >=20.19 is declared in engines. CSS is formatted and split into three files preserving cascade order; replaced text-glyph rules were removed. Metadata labels are at least 11px, technology labels 12px, and the mobile technology grid uses two columns per group.
+
+Production build and all 45 existing checks passed. qa:review passed on dev and production for social metadata, four branding asset responses, service semantics and type sizes/overflow at 320/375/768/1296px; zero/one-card initialization, resize and motion toggle; heading hover after scroll/resize; and removal of obsolete glyph rules. No JavaScript errors occurred.

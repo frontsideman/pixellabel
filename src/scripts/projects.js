@@ -19,6 +19,7 @@ export class HorizontalProjects {
     this.previous = this.section.querySelector('[data-project-prev]');
     this.next = this.section.querySelector('[data-project-next]');
     this.count = this.section.querySelector('.project-count');
+    this.indicator = this.section.querySelector('.project-progress span');
     this.media = matchMedia('(min-width: 1024px) and (pointer: fine)');
     this.index = 0; this.pending = false;
     this.previous.addEventListener('click', () => this.go(this.index - 1));
@@ -37,10 +38,10 @@ export class HorizontalProjects {
     this.measure();
   }
   measure() {
-    this.pinned = this.media.matches && !this.preferences.reduced;
+    this.pinned = this.cards.length > 1 && this.media.matches && !this.preferences.reduced;
     this.section.classList.toggle('is-pinned', this.pinned);
     this.distance = Math.max(0, this.track.scrollWidth - this.viewport.clientWidth);
-    this.step = this.cards[1].offsetLeft - this.cards[0].offsetLeft;
+    this.step = this.cards[1] ? this.cards[1].offsetLeft - this.cards[0].offsetLeft : 0;
     if(this.pinned) {
       this.viewport.scrollLeft = 0;
       this.section.style.height = `${this.stage.offsetHeight + this.distance}px`;
@@ -63,23 +64,24 @@ export class HorizontalProjects {
     const distance = Math.min(this.distance, Math.max(0, -top));
     this.track.style.setProperty('--project-x', `${-distance}px`);
     this.stage.style.setProperty('--panorama-x', `${-distance * .025}px`);
-    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, Math.round(distance / this.step)), this.distance ? distance / this.distance : 0);
+    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, this.step ? Math.round(distance / this.step) : 0), this.distance ? distance / this.distance : 0);
   }
   updateNative() {
     const distance = this.viewport.scrollLeft;
-    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, Math.round(distance / this.step)), this.distance ? distance / this.distance : 0);
+    this.setIndex(distance >= this.distance - 4 ? this.cards.length - 1 : Math.min(this.cards.length - 1, this.step ? Math.round(distance / this.step) : 0), this.distance ? distance / this.distance : 0);
   }
   setIndex(index, progress) {
-    this.index = index;
-    const text = `${String(index + 1).padStart(2,'0')} / ${String(this.cards.length).padStart(2,'0')}`;
+    const total = this.cards.length;
+    this.index = total ? Math.max(0, Math.min(total - 1, index)) : 0;
+    const text = `${String(total ? this.index + 1 : 0).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
     if(this.count.textContent !== text) this.count.textContent = text;
-    this.previous.disabled = index === 0;
-    this.next.disabled = index === this.cards.length - 1;
-    const indicator = this.section.querySelector('.project-progress span');
-    indicator.style.width = `${100 / this.cards.length}%`;
-    indicator.style.setProperty('--progress-x', `${Math.max(0,Math.min(1,progress))*(this.cards.length-1)*100}%`);
+    this.previous.disabled = !total || this.index === 0;
+    this.next.disabled = !total || this.index === total - 1;
+    this.indicator.style.width = total ? `${100 / total}%` : '0%';
+    this.indicator.style.setProperty('--progress-x', `${Math.max(0,Math.min(1,progress))*Math.max(0,total-1)*100}%`);
   }
   go(index) {
+    if (!this.cards.length) return;
     index = Math.max(0, Math.min(this.cards.length-1,index));
     const distance = index === this.cards.length-1 ? this.distance : Math.min(this.distance,index*this.step);
     if(this.pinned) {

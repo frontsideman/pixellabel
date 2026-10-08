@@ -34,11 +34,11 @@ The production site is in `dist/`. Serve that entire directory from any static w
 
 ## Content and configuration
 
-The source page, professional facts and supplied contact destinations are in `src/index.html`. Extended project summaries are in `src/scripts/projects.js`. Change both when updating projects. Palette and responsive layout live in `src/styles/main.css`; environmental lifecycle and motion preference code live in `src/scripts/motion.js`.
+The source page, professional facts and supplied contact destinations are in `src/index.html`. Extended project summaries are in `src/scripts/projects.js`. Change both when updating projects. Styles are split into `src/styles/base.css` (fonts, tokens and shared components), `src/styles/sections.css` (page scenes and content), and `src/styles/main.css` (imports, motion and responsive states); environmental lifecycle and motion preference code live in `src/scripts/motion.js`.
 
 Professional dates, roles, email and Telegram are drawn from the supplied CV. AllergenChecker, Competition, AIBook and the Nuxt/Directus corporate and marketing website with a blog were supplied directly by the owner. AllergenChecker uses barcode scans and ingredient-list photos to help identify allergens. Competition supports goal-based competitions in private groups around activity, reading, steps and other goals supported by the Apple ecosystem, using iPhone and Apple Watch. AIBook's technology and product details, the new website's brand and other public project URLs remain unspecified. BestAutoService.by includes WordPress development, design, content and SEO, and its project dialog links to the public website supplied by the owner. The previous Competition entry was updated rather than duplicated. No release, availability or current location is claimed. Contact supports email, Telegram, LinkedIn and GitHub. Project artwork is conceptual, not product screenshots. The CV itself is not copied to the public site.
 
-There is no configured public domain: canonical URL and sitemap are deliberately omitted. Add those after selecting a domain. JSON-LD Person, description, Open Graph text, favicon and robots.txt are included.
+Canonical and Open Graph URL use https://pixellabel.com/ from CNAME. Open Graph/Twitter image metadata points to og-image.jpg, a 1200×630 JPEG export of the original hero artwork. SVG/ICO favicon and Apple touch PNG are included; build copies their public assets to the repository root for static hosting and embeds the icons into standalone HTML. JSON-LD Person, description and robots.txt are included. Update the domain metadata if hosting elsewhere.
 
 ## Browser verification
 
@@ -48,6 +48,8 @@ npm run qa
 ```
 
 QA defaults to http://localhost:4173/; override with `QA_URL`. Set `QA_IDLE_SECONDS=0` for content-only verification without repeating the unchanged ambient-motion benchmark. It uses local Chrome on macOS if available. Else install the Playwright browser once with `npx playwright install chromium`.
+
+`npm run qa:review` additionally checks social metadata, dev/production branding assets, responsive text sizes, zero/one-card carousels and interactive letters after scroll/resize.
 
 The QA script verifies project/navigation dialogs, focus restoration, panorama endpoints, motion persistence, enabled default under system reduced motion, offscreen pausing, seven responsive widths, no-JS/image-failure fallbacks and 60-second idle continuity. It writes screenshots and measured results to ignored `qa-artifacts/`. See `QA.md` for results and testing limits.
 
