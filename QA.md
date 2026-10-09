@@ -139,3 +139,7 @@ Above 1800px, Hero uses 92svh within a 1000–1440px range, the portrait composi
 From 1800px, Hero now fills the viewport with a 1120px minimum, its intro has more line spacing, and its principles use 20px text with larger margins. Projects captions sit lower, cards have layered shadows with viewport padding to expose them, the neon sign has a dark drop shadow preserving its glow animation, and technology tape text is 20px.
 
 Contact tape groups contain identical additional repeats on wide screens, ensuring each animated half exceeds the viewport. Reduced motion hides the extra repeats. All 45 checks passed. Targeted checks confirmed no contact tape gap at five animation phases, unchanged sampled layouts below 1800px at four widths, full Projects background coverage, and working project navigation/dialogs. Screenshots at 2504×1344 were visually reviewed. Servers remain stopped.
+
+### Larger wide screen section headings
+
+From 1800px, all six section headings use larger type. Skills and Projects heading columns are wider, and the Skills script caption has a 48px top margin. Production standalone build and all 45 browser checks passed without runtime errors or failed assets. Targeted checks confirmed headings fit at 1800 and 2504px; sampled heading dimensions and type sizes remain unchanged at 1296 and 1799px. All six section screenshots at 2504×1344 were visually reviewed. No servers were started.

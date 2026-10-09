@@ -1751,6 +1751,37 @@ html[data-motion="reduced"] .portrait-composition {
   display: none;
 }
 @media (min-width: 1800px) {
+  .about .display {
+    font-size: clamp(100px, 4.8vw, 120px);
+  }
+  .skills .display {
+    font-size: clamp(124px, 5.6vw, 140px);
+  }
+  .skills-content {
+    grid-template-columns: 360px minmax(0, 1fr);
+  }
+  .skills .section-heading .script {
+    margin-top: 48px;
+  }
+  .projects-heading .display {
+    font-size: clamp(124px, 5.6vw, 140px);
+  }
+  .projects-layout {
+    grid-template-columns: 500px minmax(0, 1fr);
+  }
+  .project-progress {
+    left: calc(var(--page-pad) + 540px);
+  }
+  .experience .display,
+  .services .display {
+    font-size: clamp(100px, 4.6vw, 115px);
+  }
+  .experience .display {
+    max-width: 520px;
+  }
+  .contact-title .display {
+    font-size: clamp(124px, 5.6vw, 140px);
+  }
   .hero {
     height: max(1120px, 100svh);
   }
