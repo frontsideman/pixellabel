@@ -79,15 +79,15 @@ try {
   await page.setViewportSize({width:375,height:812});await page.screenshot({path:'qa-artifacts/mobile.png',fullPage:true});
   check('All requested images load', await page.locator('img:not(dialog img)').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)));
   const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:812}});const fallback=await nojs.newPage();await fallback.goto(url);
-  check('No-JS fallback keeps all content and real contact links', await fallback.locator('main section[id]').count()===7 && await fallback.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1 && await fallback.locator('#contact .button').getAttribute('href')==='mailto:' && await fallback.locator('h1').isVisible());
+  check('No-JS fallback keeps all content and real contact links', await fallback.locator('main section[id]').count()===7 && await fallback.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1 && await fallback.locator('#contact .button').getAttribute('href')==='https://t.me/Frontend_React_Vue' && await fallback.locator('h1').isVisible());
   await nojs.close();
   const system=await browser.newContext({reducedMotion:'reduce',viewport:{width:1440,height:1000}});const reduced=await system.newPage();await reduced.goto(url,{waitUntil:'networkidle'});
   check('Requested default motion stays enabled with system reduced-motion preference', await reduced.evaluate(()=>document.documentElement.dataset.motion==='on') && await reduced.locator('#projects').evaluate(e=>e.classList.contains('is-pinned')));await system.close();
   const blocked=await browser.newContext();const imagefree=await blocked.newPage();await imagefree.route('**/*.{webp,png,svg}',route=>route.abort());await imagefree.goto(url);
-  check('Artwork failure leaves semantic content and contacts usable', await imagefree.locator('h1').isVisible() && await imagefree.locator('#contact .button').getAttribute('href')==='mailto:');await blocked.close();
+  check('Artwork failure leaves semantic content and contacts usable', await imagefree.locator('h1').isVisible() && await imagefree.locator('#contact .button').getAttribute('href')==='https://t.me/Frontend_React_Vue');await blocked.close();
   check('No runtime errors or failed local assets', errors.length===0 && failedAssets.length===0);
   check('CV timeline contains eight verified roles', await page.locator('.career-stop').count()===8 && await page.locator('.career').textContent().then(text=>['EPAM Systems','Upwork','ElligintHealth','Frontend Team Lead','Oct 2013'].every(value=>text.includes(value))));
-  check('Verified CV contact channels are present', await page.locator('#contact a[href="mailto:"]').count()===3 && await page.locator('#contact a[href="https://t.me/Frontend_React_Vue"]').count()===1);
+  check('Public contact channels are present', await page.locator('#contact a[href="https://t.me/Frontend_React_Vue"]').count()===2 && await page.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1);
   const mobileContext=await browser.newContext({reducedMotion:'reduce',viewport:{width:375,height:812}});
   const mobile=await mobileContext.newPage();await mobile.goto(url,{waitUntil:'networkidle'});
   for(const [key,title] of [['allergenchecker','AllergenChecker'],['competition','Competition'],['aibook','AIBook'],['corporate','Corporate & marketing website']]) {

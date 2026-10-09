@@ -1322,16 +1322,6 @@ html[data-motion="reduced"] .tech-tape .marquee-group {
   }
 }
 
-.contact-email {
-  display: inline-block;
-  color: var(--cream);
-  font-size: 12px;
-  margin-top: 18px;
-  overflow-wrap: anywhere;
-}
-.contact-email:hover {
-  text-decoration: underline;
-}
 .career-stop {
   min-height: 78px;
 }
