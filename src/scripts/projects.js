@@ -8,7 +8,7 @@ const projects = {
   corporate: { title: 'Corporate & marketing website', category: '05 / Website and blog', asset: 'corporate', description: 'Built a corporate and marketing website with a blog using Nuxt and Directus. The site combines its corporate presence and marketing content with a CMS-backed blog.', stack: ['Nuxt', 'Directus', 'Blog', 'CMS'] },
   bixbit: { title: 'Bixbit', category: '06 / Website migration', asset: 'bixbit', description: 'Website migration to Nuxt and Directus, with a multilingual content structure, CMS integration and technical SEO. A maintainable foundation for managing and delivering content.', stack: ['Nuxt', 'Directus', 'Multilingual', 'SEO'] },
   youtube: { title: 'YouTube Skip', category: '07 / Chrome extension', asset: 'youtube', description: 'A JavaScript Chrome extension project focused on the video-viewing experience. A compact browser-based tool built around a specific everyday interaction.', stack: ['JavaScript', 'Chrome extension'] },
-  auto: { title: 'BestAutoService.by', category: '08 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design'], url: 'https://bestautoservice.by/' }
+  auto: { title: 'BestAutoService.by', category: '08 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'], url: 'https://bestautoservice.by/' }
 };
 export class HorizontalProjects {
   constructor(preferences) {
