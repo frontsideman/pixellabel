@@ -275,7 +275,7 @@
 .experience-stats {
   display: flex;
   gap: 35px;
-  border-top: 1px solid #13151a35;
+  border-top: 3px solid #13151a99;
   padding-top: 18px;
   max-width: 450px;
 }
@@ -298,14 +298,6 @@
   margin-top: 8px;
   text-transform: uppercase;
   font-weight: 700;
-}
-.paper-city {
-  position: absolute;
-  inset: 0;
-  background: url("/artwork/city-sketch.webp") center 60% / cover;
-  opacity: 0.08;
-  mix-blend-mode: multiply;
-  pointer-events: none;
 }
 .portrait-composition {
   position: relative;
