@@ -117,3 +117,9 @@ The yellow career route now tracks its actual SVG length at 40% of the viewport,
 Removed the no-op will-change declaration. The former foreground layer is a visible CSS gradient, now named hero-ground-shade and kept static without a duplicate parallax depth. Menu and project dialogs share owner-based scroll locking. README explicitly documents the four intentionally identical standalone outputs. Independent scroll handlers remain unchanged.
 
 Production build and all 45 browser checks passed with no runtime errors or failed assets. A targeted Chrome check confirmed that releasing one of two scroll-lock owners keeps scrolling blocked until the last owner releases it.
+
+### Wide desktop layout
+
+All new layout rules apply only from 1800 CSS pixels. Content is centered with a maximum width of 1880px while illustrated backgrounds remain full width. Wide layouts use larger navigation, body text, technology logos and project cards, with narrower gaps between content columns. Existing artwork resolution is unchanged.
+
+Production standalone build and all 45 browser checks passed. Before/after measurements at 375, 1296, 1440 and 1799px confirmed unchanged sampled layout dimensions and type sizes below the threshold. Wide layouts at 1800, 1920 and 2560px have no document overflow; 2560×1440 screenshots were visually reviewed. No local server was started.

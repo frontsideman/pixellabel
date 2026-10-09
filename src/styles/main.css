@@ -139,60 +139,6 @@ html[data-motion="reduced"] .tech-tape .marquee-group {
   width: 100%;
   padding-inline: 15px;
 }
-@media (min-width: 1800px) {
-  .about {
-    min-height: 730px;
-  }
-  .skills {
-    min-height: 760px;
-  }
-  .skill-group {
-    padding: 27px 20px;
-  }
-  .skill-group h3 {
-    font-size: 22px;
-  }
-  .tech {
-    font-size: 12px;
-  }
-  .tech-grid {
-    row-gap: 28px;
-  }
-  .experience {
-    min-height: 730px;
-  }
-  .career {
-    gap: 32px;
-  }
-  .career-stop p {
-    font-size: 15px;
-  }
-  .career-stop h3 {
-    font-size: 25px;
-  }
-  .career-date {
-    font-size: 12px;
-  }
-  .services {
-    min-height: 600px;
-  }
-  .service h3 {
-    font-size: 18px;
-  }
-  .service p {
-    font-size: 12px;
-  }
-  .contact {
-    min-height: 730px;
-  }
-  .contact-card {
-    max-width: 500px;
-    padding: 45px;
-  }
-  .contact-card > p {
-    font-size: 19px;
-  }
-}
 @media (max-width: 1100px) {
   .desktop-nav {
     gap: 16px;
@@ -1650,5 +1596,150 @@ html[data-motion="reduced"] .portrait-composition {
 @media (max-width: 600px) {
   .tech-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Wide desktops: preserve the existing layout below 1800 CSS pixels. */
+@media (min-width: 1800px) {
+  :root {
+    --page-pad: max(80px, calc((100vw - 1880px) / 2));
+  }
+  .desktop-nav a,
+  .header-talk,
+  .button,
+  .marquee-cta {
+    font-size: 16px;
+  }
+  .eyebrow,
+  .hero-eyebrow,
+  .hero-principles,
+  .career-date,
+  .project-count,
+  .project-index,
+  .tags span {
+    font-size: 14px;
+  }
+  .hero-content {
+    width: 560px;
+  }
+  .hero-role {
+    margin-bottom: 48px;
+  }
+  .about {
+    min-height: 800px;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .about-copy > p:not(.eyebrow) {
+    font-size: 20px;
+    max-width: 560px;
+  }
+  .about-facts,
+  .experience-stats > div > span {
+    font-size: 15px;
+  }
+  .skills {
+    min-height: 800px;
+  }
+  .skills-content {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 40px;
+  }
+  .skill-group {
+    padding: 28px 20px;
+  }
+  .skill-group h3 {
+    font-size: 22px;
+  }
+  .tech {
+    font-size: 15px;
+  }
+  .tech-logo {
+    width: 46px;
+    height: 48px;
+    margin-bottom: 10px;
+  }
+  .tech-grid {
+    row-gap: 30px;
+    column-gap: 10px;
+  }
+  .projects-layout {
+    grid-template-columns: 380px minmax(0, 1fr);
+    gap: 40px;
+    margin-right: var(--page-pad);
+  }
+  .project-card {
+    width: clamp(360px, 22vw, 450px);
+  }
+  .project-meta {
+    padding: 24px;
+  }
+  .project-meta h3 {
+    font-size: 27px;
+  }
+  .project-meta > p,
+  .projects-heading > p {
+    font-size: 16px;
+  }
+  .project-progress {
+    left: calc(var(--page-pad) + 420px);
+  }
+  .experience {
+    grid-template-columns: 520px minmax(0, 1fr);
+    gap: 80px;
+    min-height: 900px;
+  }
+  .experience-copy > p:not(.eyebrow) {
+    font-size: 19px;
+    max-width: 500px;
+  }
+  .career {
+    gap: 34px;
+  }
+  .career-stop {
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+    gap: 35px;
+  }
+  .career-stop h3 {
+    font-size: 28px;
+  }
+  .career-stop p {
+    font-size: 18px;
+  }
+  .experience-highlights {
+    max-width: 500px;
+  }
+  .experience-highlights article p {
+    font-size: 16px;
+  }
+  .services {
+    grid-template-columns: 520px minmax(0, 1fr);
+    gap: 80px;
+    min-height: 650px;
+  }
+  .services-intro > p:not(.eyebrow) {
+    font-size: 19px;
+    max-width: 460px;
+  }
+  .service-list {
+    gap: 30px;
+  }
+  .service h3 {
+    font-size: 22px;
+  }
+  .service p {
+    font-size: 16px;
+  }
+  .contact {
+    min-height: 800px;
+    grid-template-columns: 1.1fr 1fr 0.5fr;
+  }
+  .contact-card {
+    width: 100%;
+    max-width: 560px;
+    padding: 42px;
+  }
+  .contact-card > p {
+    font-size: 21px;
   }
 }
