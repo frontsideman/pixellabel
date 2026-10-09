@@ -1,6 +1,6 @@
 # Asset inventory
 
-llama.cpp uses an original outlined llama symbol, rather than another project's logo.
+llama.cpp uses the unmodified light icon from [ggml-org/llama.brand](https://github.com/ggml-org/llama.brand/blob/master/icon/icon-light.svg), the official brand asset repository. Assets are licensed under CC BY-NC 4.0; its [brand usage permission](https://github.com/ggml-org/llama.brand/blob/master/BRAND-USAGE.md) allows use to identify llama.cpp, including commercially.
 
 AI tools: Gemini, OpenCode, MCP and GitHub Copilot marks come from the installed Simple Icons package, as does Firebase. Codex uses the light app icon bundled in `/Applications/ChatGPT.app/Contents/Resources/icon-codex-light.png`, resized to 128px and embedded within its local SVG. These SVGs are hosted locally and embedded in standalone exports.
 
