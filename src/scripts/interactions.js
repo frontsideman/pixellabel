@@ -86,18 +86,6 @@ export function setupPointerInteractions(preferences) {
   });
 }
 
-export function setupSkills() {
-  const techs=[...document.querySelectorAll('.tech')];
-  techs.forEach(tech=>{
-    tech.addEventListener('pointerenter',()=>{
-      const family=tech.dataset.family;
-      if(family==='all')return;
-      techs.forEach(other=>{other.classList.toggle('related',other.dataset.family===family);other.classList.toggle('dimmed',other.dataset.family!==family&&other.dataset.family!=='all');});
-    });
-    tech.addEventListener('pointerleave',()=>techs.forEach(other=>other.classList.remove('related','dimmed')));
-  });
-}
-
 export function setupScrollScenes(preferences) {
   const hero=document.querySelector('.hero');
   const layers=[...hero.querySelectorAll('[data-depth]')];
