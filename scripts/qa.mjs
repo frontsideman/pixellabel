@@ -44,7 +44,7 @@ try {
   await page.evaluate(top=>scrollTo({top,behavior:'instant'}),sectionTop);await page.waitForTimeout(150);
   const projectCount = await page.locator('.project-card').count();
   for(let i=0;i<projectCount-1 && !(await page.locator('[data-project-next]').isDisabled());i++) { await page.locator('[data-project-next]').click(); await page.waitForTimeout(750); }
-  check('Panorama reaches the final project', (await page.locator('.project-count').textContent()).trim()===`${String(projectCount).padStart(2,'0')} / ${String(projectCount).padStart(2,'0')}`);
+  check('Panorama reaches the final project', (await page.locator('.project-count').textContent()).trim()===`3.${projectCount} / 3.${projectCount}`);
   check('Last project is visible', await page.locator('[data-project="auto"]').evaluate(e=>{const r=e.getBoundingClientRect();return r.right<=innerWidth+1 && r.left>=0;}));
   await page.locator('[data-project="auto"] .project-open').click();
   check('Project detail dialog opens with correct content', await page.locator('#project-dialog').evaluate(e=>e.open) && (await page.locator('#project-dialog-title').textContent())==='BestAutoService.by');

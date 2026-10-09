@@ -2039,3 +2039,10 @@ html[data-motion="reduced"] .portrait-composition {
   .service-list { grid-template-columns: 1fr; }
   .service { min-height: 225px; }
 }
+
+.skill-group { position: relative; }
+.skill-number { position: absolute; top: 23px; right: 16px; font-size: 12px; line-height: 1; opacity: .6; }
+.skill-group h3 { padding-right: 35px; }
+@media (min-width: 1800px) {
+  .skill-number { top: 25px; right: 20px; font-size: 14px; }
+}
