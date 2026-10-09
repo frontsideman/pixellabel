@@ -129,3 +129,7 @@ Production standalone build and all 45 browser checks passed. Before/after measu
 From 1800px, About facts use larger type and aligned icon columns, the portrait label is larger, Projects captions have more vertical padding, cards and their text are larger, Services text is larger, and Contact has more space above its script caption. The technology tape shows the expanded requested stack only on wide windows, with a longer animation duration.
 
 Removed the wide pinned scene's 1050px maximum height, which exposed the Projects section background below the artwork in tall windows. At 2504×1344, the pinned scene and background now both measure 1344px high. Project navigation and dialogs passed; screenshots were visually reviewed. Sampled layouts below 1800px remained identical at four widths, and all 45 standalone browser checks passed without runtime errors or failed assets. Servers remain stopped.
+
+### Wide screen proportion refinements
+
+Above 1800px, Hero uses 92svh within a 1000–1440px range, the portrait composition is limited to 720px, its label has larger vertical padding, the technology tape is taller, Projects extends to an 80px right inset, service numbers are 20px, and the contact tape text is capped at 60px. All 45 checks passed. Targeted 2504×1344 checks confirmed full background coverage, no overflow, working project navigation/dialogs, and unchanged sampled layouts below the threshold at four widths. Screenshots were visually reviewed; no servers were started.

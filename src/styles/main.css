@@ -1749,6 +1749,15 @@ html[data-motion="reduced"] .portrait-composition {
   display: none;
 }
 @media (min-width: 1800px) {
+  .hero {
+    height: clamp(1000px, 92svh, 1440px);
+  }
+  .portrait-composition {
+    width: 80%;
+    max-width: 720px;
+    margin-right: 0;
+    justify-self: center;
+  }
   .about-facts {
     font-size: 20px;
     gap: 14px;
@@ -1768,13 +1777,35 @@ html[data-motion="reduced"] .portrait-composition {
   }
   .portrait-label {
     font-size: 16px;
-    padding: 12px 20px;
+    padding: 20px;
   }
   .tech-tape-default {
     display: none;
   }
   .tech-tape-wide {
     display: inline;
+  }
+  .tech-tape {
+    padding-block: 18px;
+  }
+  .projects-layout {
+    margin-right: 80px;
+  }
+  .project-track {
+    padding-right: 80px;
+  }
+  .project-progress {
+    right: 80px;
+  }
+  .service-number {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .contact-marquee {
+    font-size: clamp(42px, 2.4vw, 60px);
+  }
+  html[data-motion="reduced"] .contact-marquee .marquee-group {
+    font-size: inherit;
   }
   .tech-tape .marquee-track {
     animation-duration: 180s;
