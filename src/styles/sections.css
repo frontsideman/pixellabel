@@ -603,8 +603,8 @@
   line-height: 1.5;
   width: fit-content;
   max-width: 100%;
-  padding: 10px 34px;
-  clip-path: polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%);
+  padding: 10px 28px;
+  clip-path: polygon(18px 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
   background: #13151acc;
   color: var(--cream);
   text-shadow: none;
