@@ -1801,6 +1801,20 @@ html[data-motion="reduced"] .portrait-composition {
     font-size: 20px;
     font-weight: 600;
   }
+  .site-footer {
+    font-size: 18px;
+    padding-block: 28px;
+  }
+  .site-footer button {
+    font-size: 18px;
+    min-height: 48px;
+    padding: 10px 20px;
+  }
+  .site-footer .back-top {
+    font-size: 32px;
+    width: 48px;
+    min-height: 48px;
+  }
   .contact-marquee {
     font-size: clamp(42px, 2.4vw, 60px);
   }
