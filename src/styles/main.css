@@ -1745,12 +1745,24 @@ html[data-motion="reduced"] .portrait-composition {
 }
 
 /* Expanded technology tape is reserved for wide desktop windows. */
-.tech-tape-wide {
+.tech-tape-wide,
+.contact-marquee-repeat {
   display: none;
 }
 @media (min-width: 1800px) {
   .hero {
-    height: clamp(1000px, 92svh, 1440px);
+    height: max(1120px, 100svh);
+  }
+  .hero-role {
+    margin-bottom: 64px;
+  }
+  .hero-intro {
+    line-height: 1.5;
+  }
+  .hero-principles {
+    font-size: 20px;
+    line-height: 1.55;
+    margin-block: 36px 32px;
   }
   .portrait-composition {
     width: 80%;
@@ -1826,7 +1838,7 @@ html[data-motion="reduced"] .portrait-composition {
     animation-duration: 180s;
   }
   .tech-tape .marquee-group {
-    font-size: 24px;
+    font-size: 20px;
   }
   .projects.is-pinned .projects-stage {
     max-height: none;
@@ -1839,13 +1851,29 @@ html[data-motion="reduced"] .portrait-composition {
     font-size: 19px;
     padding-block: 18px;
     line-height: 1.6;
-    margin-top: 42px;
+    margin-top: 58px;
   }
   .projects-heading .script {
-    margin-top: 44px;
+    margin-top: 64px;
+  }
+  .project-viewport {
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+  .neon-sign {
+    filter: drop-shadow(3px 4px 2px #13151ad9);
+  }
+  .contact-marquee-repeat {
+    display: inline;
+  }
+  html[data-motion="reduced"] .contact-marquee-repeat {
+    display: none;
   }
   .project-card {
     width: clamp(440px, 22vw, 540px);
+    box-shadow:
+      0 16px 32px #100c2680,
+      8px 10px 0 #351a3559;
   }
   .project-image {
     height: clamp(350px, 16vw, 420px);

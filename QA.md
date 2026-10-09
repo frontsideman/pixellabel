@@ -133,3 +133,9 @@ Removed the wide pinned scene's 1050px maximum height, which exposed the Project
 ### Wide screen proportion refinements
 
 Above 1800px, Hero uses 92svh within a 1000–1440px range, the portrait composition is limited to 720px, its label has larger vertical padding, the technology tape is taller, Projects extends to an 80px right inset, service numbers are 20px, and the contact tape text is capped at 60px. All 45 checks passed. Targeted 2504×1344 checks confirmed full background coverage, no overflow, working project navigation/dialogs, and unchanged sampled layouts below the threshold at four widths. Screenshots were visually reviewed; no servers were started.
+
+### Wide hero spacing, shadows and continuous contact tape
+
+From 1800px, Hero now fills the viewport with a 1120px minimum, its intro has more line spacing, and its principles use 20px text with larger margins. Projects captions sit lower, cards have layered shadows with viewport padding to expose them, the neon sign has a dark drop shadow preserving its glow animation, and technology tape text is 20px.
+
+Contact tape groups contain identical additional repeats on wide screens, ensuring each animated half exceeds the viewport. Reduced motion hides the extra repeats. All 45 checks passed. Targeted checks confirmed no contact tape gap at five animation phases, unchanged sampled layouts below 1800px at four widths, full Projects background coverage, and working project navigation/dialogs. Screenshots at 2504×1344 were visually reviewed. Servers remain stopped.
