@@ -26,7 +26,7 @@ The production site is in `dist/`. Serve that entire directory from any static w
 - One-time skippable intro; section entrances; proximity-reactive heading letters.
 - Fullscreen native-dialog navigation with artwork/palette crossfades on pointer and keyboard focus.
 - Bounded sticky desktop project panorama; mobile/touch/reduced-motion native scroll-snap carousel, controls and arrow keys.
-- Eight real project summaries in accessible detail dialogs; modest card tilt and preview scale.
+- Four own-project summaries in accessible detail dialogs; modest card tilt and preview scale.
 - Related-stack highlights, service artwork previews, service palette changes and scroll-drawn career route.
 - Two seamless opposite-direction marquees, iridescent CTA rims, clouds, occasional plane/traffic, subtle sky/haze, palm sway and neon breathing.
 - Ambient animation pauses outside the viewport or on document visibility changes. There is no idle JavaScript animation loop.

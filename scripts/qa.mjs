@@ -90,7 +90,7 @@ try {
   check('Public contact channels are present', await page.locator('#contact a[href="https://t.me/Frontend_React_Vue"]').count()===2 && await page.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1);
   const mobileContext=await browser.newContext({reducedMotion:'reduce',viewport:{width:375,height:812}});
   const mobile=await mobileContext.newPage();await mobile.goto(url,{waitUntil:'networkidle'});
-  for(const [key,title] of [['allergenchecker','AllergenChecker'],['competition','Competition'],['aibook','AIBook'],['corporate','Corporate & marketing website']]) {
+  for(const [key,title] of [['allergenchecker','AllergenChecker'],['competition','Competition'],['aibook','AIBook'],['auto','BestAutoService.by']]) {
     await mobile.locator(`[data-project="${key}"] .project-open`).click();
     check(`Mobile details open for ${title}`, (await mobile.locator('#project-dialog-title').textContent())===title && await mobile.locator('#project-dialog').evaluate(e=>e.open));
     if(key==='allergenchecker') check('AllergenChecker includes barcode and ingredient-photo functionality', await mobile.locator('.dialog-description').textContent().then(text=>text.includes('barcode')&&text.includes('photograph')));

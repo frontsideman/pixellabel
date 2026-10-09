@@ -155,3 +155,7 @@ Removed the 1050px pinned-stage height cap for every desktop width. At 1584×131
 ### Horizontal technology categories and AI tools
 
 Removed Redis from Skills and its wide tape, moved SCSS to Frontend, and added an AI tools category with Codex, Gemini, OpenCode and MCP. All five categories share a native horizontal scroll region with snap alignment, keyboard focus and mobile card widths. Targeted checks at 375/768/1024/1584/2504px confirmed correct category membership, horizontal overflow within the region, no document overflow, reachable AI card and loaded icons. A 1584px screenshot was visually reviewed. Production standalone build and all 45 browser checks passed without runtime errors or failed assets.
+
+### Own Projects selection
+
+Removed Consensus, Corporate & marketing website, Bixbit and YouTube Skip from the project cards and dialog data. The section is now Own Projects with AllergenChecker, Competition, AIBook and BestAutoService.by numbered 01–04. Concept artwork remains where used by service previews. The mobile dialog check now covers BestAutoService.by instead of the removed corporate entry. Production standalone build, targeted card/order/numbering checks and all 45 browser checks passed without runtime errors or failed assets.
