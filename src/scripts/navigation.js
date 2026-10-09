@@ -3,7 +3,7 @@ import { lockScroll, unlockScroll } from './scroll-lock.js';
 const worlds = {
   home: ['hero', '#ffcc86'], about: ['about', '#56d1c8'], skills: ['skills', '#abeb7a'],
   projects: ['projects', '#fc8ac1'], experience: ['experience', '#ffd166'],
-  services: ['services', '#f7ebc9'], contact: ['contact', '#ba9cff']
+  services: ['services', '#f7ebc9'], collaboration: ['about', '#ffda77'], contact: ['contact', '#ba9cff']
 };
 export function setupNavigation() {
   const dialog = document.querySelector('#menu');

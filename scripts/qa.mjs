@@ -20,9 +20,9 @@ await page.addInitScript(() => {
 try {
   await page.goto(url, { waitUntil: 'networkidle' });
   await page.waitForTimeout(2500);
-  check('Seven semantic sections and one h1', await page.locator('main section[id]').count()===7 && await page.locator('h1').count()===1);
+  check('Eight semantic sections and one h1', await page.locator('main section[id]').count()===8 && await page.locator('h1').count()===1);
   check('Desktop project panorama pins', await page.locator('#projects').evaluate(e=>e.classList.contains('is-pinned')));
-  for(const id of ['home','about','skills','projects','experience','services','contact']) {
+  for(const id of ['home','about','skills','projects','services','experience','collaboration','contact']) {
     await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'}));
     await page.waitForTimeout(250);
   }
@@ -73,13 +73,13 @@ try {
     check(`No document overflow at ${width}px`, await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     check(`Headings fit at ${width}px`, await page.locator('main h1 .word,main h2 .word').evaluateAll(words=>words.filter(e=>!e.closest('.projects')).every(e=>e.getBoundingClientRect().right<=innerWidth+1)));
   }
-  for(const id of ['home','about','skills','projects','experience','services','contact']) { await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'})); await page.waitForTimeout(150); }
+  for(const id of ['home','about','skills','projects','services','experience','collaboration','contact']) { await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'})); await page.waitForTimeout(150); }
   await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'qa-artifacts/desktop.png',fullPage:true});
   await page.setViewportSize({width:375,height:812});await page.screenshot({path:'qa-artifacts/mobile.png',fullPage:true});
   check('All requested images load', await page.locator('img:not(dialog img)').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)));
   const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:812}});const fallback=await nojs.newPage();await fallback.goto(url);
-  check('No-JS fallback keeps all content and real contact links', await fallback.locator('main section[id]').count()===7 && await fallback.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1 && await fallback.locator('#contact .button').getAttribute('href')==='https://t.me/Frontend_React_Vue' && await fallback.locator('h1').isVisible());
+  check('No-JS fallback keeps all content and real contact links', await fallback.locator('main section[id]').count()===8 && await fallback.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1 && await fallback.locator('#contact .button').getAttribute('href')==='https://t.me/Frontend_React_Vue' && await fallback.locator('h1').isVisible());
   await nojs.close();
   const system=await browser.newContext({reducedMotion:'reduce',viewport:{width:1440,height:1000}});const reduced=await system.newPage();await reduced.goto(url,{waitUntil:'networkidle'});
   check('Requested default motion stays enabled with system reduced-motion preference', await reduced.evaluate(()=>document.documentElement.dataset.motion==='on') && await reduced.locator('#projects').evaluate(e=>e.classList.contains('is-pinned')));await system.close();
