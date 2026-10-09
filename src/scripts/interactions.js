@@ -98,29 +98,36 @@ export function setupSkills() {
   });
 }
 
-export function setupServices(preferences) {
+export function setupServices() {
   const section=document.querySelector('.services');
-  const preview=section.querySelector('.service-preview');
-  const fine=matchMedia('(pointer: fine)');
-  const assets={apps:'consensus',ui:'about',architecture:'bixbit',review:'experience',mvp:'competitions',performance:'auto'};
-  const colors={apps:'#f5e5bc',ui:'#f4e1c5',architecture:'#e9e9c9',review:'#f0e2c7',mvp:'#f3e4cb',performance:'#e6e8c5'};
-  section.querySelectorAll('.service').forEach(service=>{
-    const activate=()=>{
-      section.style.backgroundColor=colors[service.dataset.service];
-      preview.querySelector('img').src=`${import.meta.env.BASE_URL}artwork/${assets[service.dataset.service]}.webp`;
-    };
-    service.addEventListener('pointerenter',activate);service.addEventListener('focus',activate);
-    service.addEventListener('pointermove',event=>{
-      if(!fine.matches||preferences.reduced||innerWidth<1100)return;
-      const r=section.getBoundingClientRect();
-      preview.style.left=`${Math.min(r.width-110,Math.max(100,event.clientX-r.left-100))}px`;
-      preview.style.top=`${Math.max(80,event.clientY-r.top-110)}px`;
-      preview.style.opacity='1';
-    });
-    const reset=()=>{section.style.backgroundColor='';preview.style.opacity='0';};
-    service.addEventListener('pointerleave',reset);service.addEventListener('blur',reset);
-    preferences.addEventListener('change',reset);
-  });
+  const details=section.querySelector('.service-details');
+  const cards=[...section.querySelectorAll('.service')];
+  const descriptions={
+    apps:'Build a web product, an iOS app or a content-driven website. We can discuss the scope, integrations and the path to production.',
+    ui:'Turn your design into a responsive interface, with attention to accessibility, interactions and reusable components.',
+    architecture:'Choose clear boundaries, state management and component structure so the frontend can evolve with the product.',
+    review:'Get an experienced perspective on code and technical decisions, with practical feedback and support for your team.',
+    mvp:'Identify the essential first version and turn it into a working product that can be improved with real feedback.',
+    performance:'Find bottlenecks in loading and interactions, then focus on the changes that improve the user experience.'
+  };
+  let active=null;
+  const close=()=>{
+    details.hidden=true;
+    cards.forEach(card=>card.setAttribute('aria-expanded','false'));
+    active?.focus({preventScroll:true});
+    active=null;
+  };
+  cards.forEach(card=>card.addEventListener('click',()=>{
+    if(active===card){close();return;}
+    active=card;
+    cards.forEach(item=>item.setAttribute('aria-expanded',String(item===card)));
+    details.querySelector('h3').textContent=card.querySelector('h3').innerText.replace(/\n/g,' ');
+    details.querySelector('.service-details-description').textContent=descriptions[card.dataset.service];
+    details.hidden=false;
+    details.querySelector('.service-details-close').focus();
+  }));
+  details.querySelector('.service-details-close').addEventListener('click',close);
+  details.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();close();}});
 }
 
 export function setupScrollScenes(preferences) {
