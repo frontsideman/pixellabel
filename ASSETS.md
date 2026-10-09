@@ -1,6 +1,6 @@
 # Asset inventory
 
-AI tools: Gemini, OpenCode and MCP marks come from the installed Simple Icons package. Codex uses an original terminal symbol rather than an official brand mark. These SVGs are hosted locally and embedded in standalone exports.
+AI tools: Gemini, OpenCode, MCP and GitHub Copilot marks come from the installed Simple Icons package, as does Firebase. Codex uses the light app icon bundled in `/Applications/ChatGPT.app/Contents/Resources/icon-codex-light.png`, resized to 128px and embedded within its local SVG. These SVGs are hosted locally and embedded in standalone exports.
 
 Skills additions: WordPress, GitHub and GitHub Actions SVGs come from the installed Simple Icons package with their brand colors. The Playwright SVG comes from the installed playwright-core recorder assets. All four are hosted locally and embedded in standalone exports.
 

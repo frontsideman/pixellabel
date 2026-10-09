@@ -1757,7 +1757,7 @@ html[data-motion="reduced"] .portrait-composition {
   align-items: stretch;
   min-width: 0;
   overflow-x: auto;
-  padding: 8px 6px 18px 0;
+  padding: 12px 10px 32px 4px;
   scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
