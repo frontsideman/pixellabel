@@ -562,6 +562,7 @@
 .round-button {
   width: 44px;
   height: 44px;
+  padding: 0;
   border-radius: 50%;
   border: 1.5px solid var(--ink);
   background: var(--cream);
@@ -571,6 +572,12 @@
   transition:
     color var(--motion-duration),
     background var(--motion-duration);
+}
+.round-button svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
 }
 .round-button:hover {
   background: var(--ink);
