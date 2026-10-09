@@ -1744,9 +1744,8 @@ html[data-motion="reduced"] .portrait-composition {
   }
 }
 
-/* Expanded technology tape is reserved for wide desktop windows. */
+/* Decorative additions for wide desktop windows. */
 .about-fact-icon,
-.tech-tape-wide,
 .contact-marquee-repeat {
   display: none;
 }
@@ -1875,12 +1874,6 @@ html[data-motion="reduced"] .portrait-composition {
     font-size: 16px;
     padding: 20px;
   }
-  .tech-tape-default {
-    display: none;
-  }
-  .tech-tape-wide {
-    display: inline;
-  }
   .tech-tape {
     padding-block: 14px;
   }
@@ -1917,9 +1910,6 @@ html[data-motion="reduced"] .portrait-composition {
   }
   html[data-motion="reduced"] .contact-marquee .marquee-group {
     font-size: inherit;
-  }
-  .tech-tape .marquee-track {
-    animation-duration: 180s;
   }
   .tech-tape .marquee-group {
     font-size: 20px;

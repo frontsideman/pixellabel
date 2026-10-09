@@ -497,7 +497,7 @@
 }
 .tech-tape .marquee-track {
   animation-direction: reverse;
-  animation-duration: 43s;
+  animation-duration: 180s;
 }
 .tech-tape .marquee-group {
   min-width: 100vw;
