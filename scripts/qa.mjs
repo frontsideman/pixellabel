@@ -22,7 +22,7 @@ try {
   await page.waitForTimeout(2500);
   check('Eight semantic sections and one h1', await page.locator('main section[id]').count()===8 && await page.locator('h1').count()===1);
   check('Desktop project panorama pins', await page.locator('#projects').evaluate(e=>e.classList.contains('is-pinned')));
-  for(const id of ['home','about','skills','projects','services','experience','collaboration','contact']) {
+  for(const id of ['home','about','skills','services','projects','collaboration','experience','contact']) {
     await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'}));
     await page.waitForTimeout(250);
   }
@@ -44,7 +44,7 @@ try {
   await page.evaluate(top=>scrollTo({top,behavior:'instant'}),sectionTop);await page.waitForTimeout(150);
   const projectCount = await page.locator('.project-card').count();
   for(let i=0;i<projectCount-1 && !(await page.locator('[data-project-next]').isDisabled());i++) { await page.locator('[data-project-next]').click(); await page.waitForTimeout(750); }
-  check('Panorama reaches the final project', (await page.locator('.project-count').textContent()).trim()===`3.${projectCount} / 3.${projectCount}`);
+  check('Panorama reaches the final project', (await page.locator('.project-count').textContent()).trim()===`4.${projectCount} / 4.${projectCount}`);
   check('Last project is visible', await page.locator('[data-project="auto"]').evaluate(e=>{const r=e.getBoundingClientRect();return r.right<=innerWidth+1 && r.left>=0;}));
   await page.locator('[data-project="auto"] .project-open').click();
   check('Project detail dialog opens with correct content', await page.locator('#project-dialog').evaluate(e=>e.open) && (await page.locator('#project-dialog-title').textContent())==='BestAutoService.by');
@@ -73,7 +73,7 @@ try {
     check(`No document overflow at ${width}px`, await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     check(`Headings fit at ${width}px`, await page.locator('main h1 .word,main h2 .word').evaluateAll(words=>words.filter(e=>!e.closest('.projects')).every(e=>e.getBoundingClientRect().right<=innerWidth+1)));
   }
-  for(const id of ['home','about','skills','projects','services','experience','collaboration','contact']) { await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'})); await page.waitForTimeout(150); }
+  for(const id of ['home','about','skills','services','projects','collaboration','experience','contact']) { await page.locator(`#${id}`).evaluate(e=>e.scrollIntoView({behavior:'instant'})); await page.waitForTimeout(150); }
   await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'qa-artifacts/desktop.png',fullPage:true});
   await page.setViewportSize({width:375,height:812});await page.screenshot({path:'qa-artifacts/mobile.png',fullPage:true});
