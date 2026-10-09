@@ -1752,7 +1752,8 @@ html[data-motion="reduced"] .portrait-composition {
 .skill-groups {
   grid-template-columns: none;
   grid-auto-flow: column;
-  grid-auto-columns: max(240px, calc((100% - 40px) / 4.25));
+  gap: 16px;
+  grid-auto-columns: max(240px, calc((100% - 64px) / 4.25));
   align-items: stretch;
   min-width: 0;
   overflow-x: auto;
