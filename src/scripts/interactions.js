@@ -98,38 +98,6 @@ export function setupSkills() {
   });
 }
 
-export function setupServices() {
-  const section=document.querySelector('.services');
-  const details=section.querySelector('.service-details');
-  const cards=[...section.querySelectorAll('.service')];
-  const descriptions={
-    apps:'Build a web product, an iOS app or a content-driven website. We can discuss the scope, integrations and the path to production.',
-    ui:'Turn your design into a responsive interface, with attention to accessibility, interactions and reusable components.',
-    architecture:'Choose clear boundaries, state management and component structure so the frontend can evolve with the product.',
-    review:'Get an experienced perspective on code and technical decisions, with practical feedback and support for your team.',
-    mvp:'Identify the essential first version and turn it into a working product that can be improved with real feedback.',
-    performance:'Find bottlenecks in loading and interactions, then focus on the changes that improve the user experience.'
-  };
-  let active=null;
-  const close=()=>{
-    details.hidden=true;
-    cards.forEach(card=>card.setAttribute('aria-expanded','false'));
-    active?.focus({preventScroll:true});
-    active=null;
-  };
-  cards.forEach(card=>card.addEventListener('click',()=>{
-    if(active===card){close();return;}
-    active=card;
-    cards.forEach(item=>item.setAttribute('aria-expanded',String(item===card)));
-    details.querySelector('h3').textContent=card.querySelector('h3').innerText.replace(/\n/g,' ');
-    details.querySelector('.service-details-description').textContent=descriptions[card.dataset.service];
-    details.hidden=false;
-    details.querySelector('.service-details-close').focus();
-  }));
-  details.querySelector('.service-details-close').addEventListener('click',close);
-  details.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();close();}});
-}
-
 export function setupScrollScenes(preferences) {
   const hero=document.querySelector('.hero');
   const layers=[...hero.querySelectorAll('[data-depth]')];

@@ -2015,20 +2015,13 @@ html[data-motion="reduced"] .portrait-composition {
   box-shadow: 5px 6px 0 var(--yellow); font-family: inherit;
   transition: transform var(--motion-duration), box-shadow var(--motion-duration);
 }
-.service:hover, .service:focus-visible, .service[aria-expanded="true"] { transform: translateY(-5px); box-shadow: 5px 11px 0 var(--yellow); }
+.service:hover, .service:focus-visible { transform: translateY(-5px); box-shadow: 5px 11px 0 var(--yellow); }
 .service-list:has(.service:hover) .service:not(:hover) { opacity: 1; }
 .service-icon { color: var(--yellow); height: auto; margin-bottom: 26px; }
 .service-icon svg { width: 38px; height: 38px; }
 .service h3 { font-size: clamp(18px, 1.45vw, 28px); line-height: 1.25; margin-bottom: 16px; min-height: 0; letter-spacing: -.025em; }
 .service p { font-size: clamp(14px, 1.05vw, 20px); line-height: 1.5; }
 .service-number { right: 22px; top: 26px; font-size: 13px; opacity: .7; }
-.service-arrow { position: absolute; right: 22px; bottom: 16px; font-size: 27px; color: var(--yellow); }
-.service-details { position: relative; background: #101b1b; color: var(--cream); padding: 32px; margin-top: 28px; border-radius: 4px; }
-.service-details[hidden] { display: none; }
-.service-details h3 { font-size: 26px; margin-bottom: 16px; }
-.service-details-description { font-size: 17px; line-height: 1.6; max-width: 720px; margin-bottom: 24px; }
-.service-details-close { position: absolute; top: 12px; right: 12px; color: var(--cream); background: transparent; border: 0; width: 44px; height: 44px; font-size: 28px; }
-.service-details .eyebrow { padding-right: 35px; }
 @media (min-width: 1800px) {
   .services { padding-top: 120px; padding-bottom: 130px; }
   .service { min-height: 330px; padding: 36px 30px 60px; }
@@ -2051,10 +2044,6 @@ html[data-motion="reduced"] .portrait-composition {
   .service p { font-size: 13px; }
   .service-icon svg { width: 32px; height: 32px; }
   .service-number { top: 20px; right: 14px; font-size: 11px; }
-  .service-arrow { right: 14px; }
-  .service-details { padding: 28px 22px; }
-  .service-details h3 { font-size: 23px; }
-  .service-details-description { font-size: 16px; }
 }
 @media (max-width: 380px) {
   .service-list { grid-template-columns: 1fr; }
