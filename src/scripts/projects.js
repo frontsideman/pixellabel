@@ -1,10 +1,10 @@
 import { lockScroll, unlockScroll } from './scroll-lock.js';
 
 const projects = {
-  allergenchecker: { title: 'AllergenChecker', category: '4.1 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
-  competition: { title: 'Competition', category: '4.2 / iOS application', asset: 'competitions', description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
-  aibook: { title: 'AIBook', category: '4.3 / Product development', asset: 'aibook', description: 'Created AIBook.', stack: ['Product development'] },
-  auto: { title: 'BestAutoService.by', category: '4.4 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'], url: 'https://bestautoservice.by/' }
+  allergenchecker: { title: 'AllergenChecker', category: '5.1 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
+  competition: { title: 'Competition', category: '5.2 / iOS application', asset: 'competitions', description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
+  aibook: { title: 'AIBook', category: '5.3 / Product development', asset: 'aibook', description: 'Created AIBook.', stack: ['Product development'] },
+  auto: { title: 'BestAutoService.by', category: '5.4 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'], url: 'https://bestautoservice.by/' }
 };
 export class HorizontalProjects {
   constructor(preferences) {
@@ -71,7 +71,7 @@ export class HorizontalProjects {
   setIndex(index, progress) {
     const total = this.cards.length;
     this.index = total ? Math.max(0, Math.min(total - 1, index)) : 0;
-    const text = `4.${total ? this.index + 1 : 0} / 4.${total}`;
+    const text = `5.${total ? this.index + 1 : 0} / 5.${total}`;
     if(this.count.textContent !== text) this.count.textContent = text;
     this.previous.disabled = !total || this.index === 0;
     this.next.disabled = !total || this.index === total - 1;
