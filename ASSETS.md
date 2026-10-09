@@ -1,5 +1,7 @@
 # Asset inventory
 
+Character update (2026-10-09): Hero, its transparent foreground, About and Experience were edited with ImageGen using `docs/persona.md` and the first edited foreground as an identity reference. New source PNGs are in `artwork-persona/`; the previous exports are archived in `artwork-originals/2026-10-09/`. Mobile, portrait and social derivatives were regenerated with the original dimensions and alpha behavior. Poses and composition are retained; generative edits do not preserve every background pixel.
+
 All illustrative imagery was created for this portfolio during this session. The user’s uploaded mockup is a composition reference and is not embedded in the website. There are no external stock images, game assets, copyrighted game characters or game logos. Generated illustrations are original concept artwork; no exclusive-rights or legal-clearance claim is made. Source PNGs remain in the creation-session Codex image directory. Exported files needed to run the site are in this project.
 
 | File in public/artwork | Dimensions | Format | Provenance |

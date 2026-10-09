@@ -55,6 +55,8 @@ The QA script verifies project/navigation dialogs, focus restoration, panorama e
 
 ## Artwork and references
 
+The main character in Hero, About and Experience follows `docs/persona.md`. ImageGen edit sources are preserved in `artwork-persona/`; the previous WebP artwork and social image are preserved in `artwork-originals/2026-10-09/`, outside the public build. `scripts/prepare-persona.cjs` exports the edited images, mobile variants and social preview at the existing dimensions. Generative edits preserve the poses and composition, but some background details differ from the originals.
+
 See `ASSETS.md` for provenance, dimensions and font licenses. Exported WebP/SVG/WOFF2 files are included; no asset-generation service is needed to run the site. `scripts/prepare-*.cjs` are creation-session export helpers and refer to the original generated source files in this computer's Codex image directory; they are not build prerequisites.
 
 The supplied [CodePen](https://codepen.io/jh3y/pen/MYgaaem) was inspected. It demonstrates scroll-driven list brightening and hue progression, rather than the pointer-letter interaction described in the brief. The portfolio includes an original heading-proximity effect and scroll-progress milestone emphasis; it does not claim to copy a nonexistent pointer demo. [Metalab](https://www.metalab.com/) was inspected for the navigation direction; the menu implementation here is original.

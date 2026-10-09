@@ -143,3 +143,7 @@ Contact tape groups contain identical additional repeats on wide screens, ensuri
 ### Larger wide screen section headings
 
 From 1800px, all six section headings use larger type. Skills and Projects heading columns are wider, and the Skills script caption has a 48px top margin. Production standalone build and all 45 browser checks passed without runtime errors or failed assets. Targeted checks confirmed headings fit at 1800 and 2504px; sampled heading dimensions and type sizes remain unchanged at 1296 and 1799px. All six section screenshots at 2504×1344 were visually reviewed. No servers were started.
+
+### Persona artwork update
+
+Hero, its transparent foreground, About and Experience now use the bald, mature, dark-and-gray-bearded character specified in docs/persona.md. Original exports are preserved outside the public build, along with the old social preview. Existing dimensions and transparency were checked for every WebP asset. Production standalone build and all 45 browser checks passed with no runtime errors or failed assets. New source images and desktop/mobile screenshots were visually reviewed. ImageGen retained the poses and composition, but some surrounding details changed; exact pixel preservation is not claimed.
