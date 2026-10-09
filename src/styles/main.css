@@ -1745,6 +1745,7 @@ html[data-motion="reduced"] .portrait-composition {
 }
 
 /* Expanded technology tape is reserved for wide desktop windows. */
+.about-fact-icon,
 .tech-tape-wide,
 .contact-marquee-repeat {
   display: none;
@@ -1762,7 +1763,7 @@ html[data-motion="reduced"] .portrait-composition {
   .hero-principles {
     font-size: 20px;
     line-height: 1.55;
-    margin-block: 36px 32px;
+    margin-block: 36px 72px;
   }
   .portrait-composition {
     width: 80%;
@@ -1785,7 +1786,19 @@ html[data-motion="reduced"] .portrait-composition {
     width: 32px;
     height: 32px;
     margin: 0;
-    font-size: 18px;
+    font-size: 0;
+    line-height: 1;
+  }
+  .about-fact-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+  .experience-stats strong {
+    font-size: 60px;
+  }
+  .experience-stats strong span {
+    font-size: 36px;
   }
   .portrait-label {
     font-size: 16px;
