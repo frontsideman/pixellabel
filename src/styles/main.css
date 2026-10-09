@@ -1743,3 +1743,90 @@ html[data-motion="reduced"] .portrait-composition {
     font-size: 21px;
   }
 }
+
+/* Expanded technology tape is reserved for wide desktop windows. */
+.tech-tape-wide {
+  display: none;
+}
+@media (min-width: 1800px) {
+  .about-facts {
+    font-size: 20px;
+    gap: 14px;
+    line-height: 1.5;
+  }
+  .about-facts li {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+    column-gap: 12px;
+  }
+  .about-facts span {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    font-size: 18px;
+  }
+  .portrait-label {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+  .tech-tape-default {
+    display: none;
+  }
+  .tech-tape-wide {
+    display: inline;
+  }
+  .tech-tape .marquee-track {
+    animation-duration: 180s;
+  }
+  .tech-tape .marquee-group {
+    font-size: 28px;
+  }
+  .projects.is-pinned .projects-stage {
+    max-height: none;
+  }
+  .projects-stage {
+    height: 900px;
+    min-height: 800px;
+  }
+  .projects-heading > p {
+    font-size: 19px;
+    padding-block: 18px;
+    line-height: 1.6;
+  }
+  .project-card {
+    width: clamp(440px, 22vw, 540px);
+  }
+  .project-image {
+    height: clamp(350px, 16vw, 420px);
+  }
+  .project-meta {
+    padding: 28px;
+  }
+  .project-meta h3 {
+    font-size: 32px;
+  }
+  .project-meta > p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-block: 12px 18px;
+  }
+  .project-meta .tags span {
+    font-size: 16px;
+    padding: 7px 9px;
+  }
+  .service h3 {
+    font-size: 26px;
+  }
+  .service p {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .services-intro > p:not(.eyebrow) {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+  .contact-title .script {
+    margin-top: 52px;
+  }
+}

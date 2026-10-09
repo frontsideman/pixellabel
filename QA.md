@@ -123,3 +123,9 @@ Production build and all 45 browser checks passed with no runtime errors or fail
 All new layout rules apply only from 1800 CSS pixels. Content is centered with a maximum width of 1880px while illustrated backgrounds remain full width. Wide layouts use larger navigation, body text, technology logos and project cards, with narrower gaps between content columns. Existing artwork resolution is unchanged.
 
 Production standalone build and all 45 browser checks passed. Before/after measurements at 375, 1296, 1440 and 1799px confirmed unchanged sampled layout dimensions and type sizes below the threshold. Wide layouts at 1800, 1920 and 2560px have no document overflow; 2560×1440 screenshots were visually reviewed. No local server was started.
+
+### Wide desktop browser feedback
+
+From 1800px, About facts use larger type and aligned icon columns, the portrait label is larger, Projects captions have more vertical padding, cards and their text are larger, Services text is larger, and Contact has more space above its script caption. The technology tape shows the expanded requested stack only on wide windows, with a longer animation duration.
+
+Removed the wide pinned scene's 1050px maximum height, which exposed the Projects section background below the artwork in tall windows. At 2504×1344, the pinned scene and background now both measure 1344px high. Project navigation and dialogs passed; screenshots were visually reviewed. Sampled layouts below 1800px remained identical at four widths, and all 45 standalone browser checks passed without runtime errors or failed assets. Servers remain stopped.
