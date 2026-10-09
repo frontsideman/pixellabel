@@ -1750,6 +1750,17 @@ html[data-motion="reduced"] .portrait-composition {
 .contact-marquee-repeat {
   display: none;
 }
+@media (min-width: 1024px) {
+  .projects-heading {
+    padding-top: 42px;
+  }
+  .projects-heading > p {
+    margin-top: 38px;
+  }
+  .projects-heading .script {
+    margin-top: 44px;
+  }
+}
 @media (min-width: 1800px) {
   .about .display {
     font-size: clamp(100px, 4.8vw, 120px);

@@ -147,3 +147,7 @@ From 1800px, all six section headings use larger type. Skills and Projects headi
 ### Persona artwork update
 
 Hero, its transparent foreground, About and Experience now use the bald, mature, dark-and-gray-bearded character specified in docs/persona.md. Original exports are preserved outside the public build, along with the old social preview. Existing dimensions and transparency were checked for every WebP asset. Production standalone build and all 45 browser checks passed with no runtime errors or failed assets. New source images and desktop/mobile screenshots were visually reviewed. ImageGen retained the poses and composition, but some surrounding details changed; exact pixel preservation is not claimed.
+
+### Projects coverage in tall desktop windows
+
+Removed the 1050px pinned-stage height cap for every desktop width. At 1584×1313 the stage and panorama now cover the full 1313px viewport, including while scrolling through cards. From 1024px the heading block has 42px top padding, its description has a 38px top margin, and its script caption has a 44px top margin; existing wider-screen caption margins still apply. Targeted coverage/overflow checks and visual review passed. Production standalone build and all 45 browser checks passed with no runtime errors or failed assets.
