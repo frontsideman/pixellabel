@@ -1751,6 +1751,10 @@ html[data-motion="reduced"] .portrait-composition {
   display: none;
 }
 @media (min-width: 1024px) {
+  .hero-eyebrow {
+    position: relative;
+    top: -24px;
+  }
   .projects-heading {
     padding-top: 42px;
   }
