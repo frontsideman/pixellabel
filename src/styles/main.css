@@ -1786,7 +1786,7 @@ html[data-motion="reduced"] .portrait-composition {
     display: inline;
   }
   .tech-tape {
-    padding-block: 18px;
+    padding-block: 14px;
   }
   .projects-layout {
     margin-right: 80px;
@@ -1816,7 +1816,8 @@ html[data-motion="reduced"] .portrait-composition {
     min-height: 48px;
   }
   .contact-marquee {
-    font-size: clamp(42px, 2.4vw, 60px);
+    font-size: clamp(38px, 1.9vw, 48px);
+    padding-block: 14px;
   }
   html[data-motion="reduced"] .contact-marquee .marquee-group {
     font-size: inherit;
@@ -1825,7 +1826,7 @@ html[data-motion="reduced"] .portrait-composition {
     animation-duration: 180s;
   }
   .tech-tape .marquee-group {
-    font-size: 28px;
+    font-size: 24px;
   }
   .projects.is-pinned .projects-stage {
     max-height: none;
@@ -1838,6 +1839,10 @@ html[data-motion="reduced"] .portrait-composition {
     font-size: 19px;
     padding-block: 18px;
     line-height: 1.6;
+    margin-top: 42px;
+  }
+  .projects-heading .script {
+    margin-top: 44px;
   }
   .project-card {
     width: clamp(440px, 22vw, 540px);
