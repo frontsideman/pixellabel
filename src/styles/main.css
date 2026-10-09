@@ -1750,6 +1750,31 @@ html[data-motion="reduced"] .portrait-composition {
 .contact-marquee-repeat {
   display: none;
 }
+.skill-groups {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: max(240px, calc((100% - 30px) / 4));
+  align-items: stretch;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 8px 6px 18px 0;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cream) #13151a66;
+}
+.skill-group {
+  scroll-snap-align: start;
+}
+.skill-groups:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 4px;
+}
+@media (max-width: 600px) {
+  .skill-groups {
+    grid-auto-columns: 85%;
+  }
+}
 @media (min-width: 1024px) {
   .hero-eyebrow {
     position: relative;

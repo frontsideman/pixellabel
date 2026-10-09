@@ -151,3 +151,7 @@ Hero, its transparent foreground, About and Experience now use the bald, mature,
 ### Projects coverage in tall desktop windows
 
 Removed the 1050px pinned-stage height cap for every desktop width. At 1584×1313 the stage and panorama now cover the full 1313px viewport, including while scrolling through cards. From 1024px the heading block has 42px top padding, its description has a 38px top margin, and its script caption has a 44px top margin; existing wider-screen caption margins still apply. Targeted coverage/overflow checks and visual review passed. Production standalone build and all 45 browser checks passed with no runtime errors or failed assets.
+
+### Horizontal technology categories and AI tools
+
+Removed Redis from Skills and its wide tape, moved SCSS to Frontend, and added an AI tools category with Codex, Gemini, OpenCode and MCP. All five categories share a native horizontal scroll region with snap alignment, keyboard focus and mobile card widths. Targeted checks at 375/768/1024/1584/2504px confirmed correct category membership, horizontal overflow within the region, no document overflow, reachable AI card and loaded icons. A 1584px screenshot was visually reviewed. Production standalone build and all 45 browser checks passed without runtime errors or failed assets.

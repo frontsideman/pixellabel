@@ -1,5 +1,7 @@
 # Asset inventory
 
+AI tools: Gemini, OpenCode and MCP marks come from the installed Simple Icons package. Codex uses an original terminal symbol rather than an official brand mark. These SVGs are hosted locally and embedded in standalone exports.
+
 Skills additions: WordPress, GitHub and GitHub Actions SVGs come from the installed Simple Icons package with their brand colors. The Playwright SVG comes from the installed playwright-core recorder assets. All four are hosted locally and embedded in standalone exports.
 
 Character update (2026-10-09): Hero, its transparent foreground, About and Experience were edited with ImageGen using `docs/persona.md` and the first edited foreground as an identity reference. New source PNGs are in `artwork-persona/`; the previous exports are archived in `artwork-originals/2026-10-09/`. Mobile, portrait and social derivatives were regenerated with the original dimensions and alpha behavior. Poses and composition are retained; generative edits do not preserve every background pixel.
