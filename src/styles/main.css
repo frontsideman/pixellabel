@@ -2101,3 +2101,22 @@ html[data-motion="reduced"] .portrait-composition {
 @media (max-width: 380px) {
   .collaboration-grid { grid-template-columns: 1fr; }
 }
+
+.contact-message:hover { box-shadow: 0 4px 0 #13151a30; }
+.contact-message:hover span { transform: none; }
+.neon-sign { -webkit-text-stroke: 1px #3b2418; paint-order: stroke fill; }
+.skills-caption {
+  background: #101b20f2;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  max-width: calc(100% - 48px);
+  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+}
+@media (min-width: 1800px) {
+  .skills-caption { font-size: 18px; padding: 16px 30px; }
+  .neon-sign { -webkit-text-stroke-width: 1.5px; }
+}
+@media (max-width: 600px) {
+  .skills-caption { font-size: 12px; padding: 12px 20px; }
+}

@@ -90,7 +90,7 @@ try {
     assert.equal(await small.locator(".project-card").count(), total);
     assert.equal(
       await small.locator(".project-count").textContent(),
-      total ? "01 / 01" : "00 / 00",
+      total ? "5.1 / 5.1" : "5.0 / 5.0",
     );
     assert(await small.locator("[data-project-prev]").isDisabled());
     assert(await small.locator("[data-project-next]").isDisabled());

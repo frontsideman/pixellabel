@@ -1,19 +1,19 @@
 /* Fonts, tokens, resets and shared components. */
 @font-face {
   font-family: Anton;
-  src: url("/fonts/anton.woff2") format("woff2");
+  src: url("../fonts/anton.woff2") format("woff2");
   font-display: swap;
   font-weight: 400;
 }
 @font-face {
   font-family: "DM Sans";
-  src: url("/fonts/dm-sans.woff2") format("woff2");
+  src: url("../fonts/dm-sans.woff2") format("woff2");
   font-display: swap;
   font-weight: 400;
 }
 @font-face {
   font-family: Caveat;
-  src: url("/fonts/caveat.woff2") format("woff2");
+  src: url("../fonts/caveat.woff2") format("woff2");
   font-display: swap;
   font-weight: 700;
 }

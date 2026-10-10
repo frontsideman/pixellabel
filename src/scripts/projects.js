@@ -28,11 +28,12 @@ export class HorizontalProjects {
     this.viewport.addEventListener('focusin', event => { const card=event.target.closest('.project-card'); if(card && event.target.matches(':focus-visible')) this.go(this.cards.indexOf(card)); });
     this.viewport.addEventListener('scroll', () => { if(!this.pinned) this.updateNative(); }, {passive:true});
     window.addEventListener('scroll', () => this.schedule(), {passive:true});
+    // Late metrics change distances, not the user's scroll position.
     this.media.addEventListener('change', () => this.measure());
     preferences.addEventListener('change', () => this.measure());
-    new ResizeObserver(() => this.measure()).observe(this.viewport);
-    document.fonts.ready.then(() => this.measure());
-    this.track.querySelectorAll('img').forEach(image => image.addEventListener('load', () => this.measure()));
+    new ResizeObserver(() => this.refresh()).observe(this.viewport);
+    document.fonts.ready.then(() => this.refresh());
+    this.track.querySelectorAll('img').forEach(image => image.addEventListener('load', () => this.refresh()));
     this.measure();
   }
   measure() {
@@ -49,6 +50,13 @@ export class HorizontalProjects {
       this.stage.style.removeProperty('--panorama-x');
       this.viewport.scrollLeft = Math.min(this.index * this.step, this.distance);
     }
+    this.update();
+  }
+  refresh() {
+    if(!this.cards.length) return;
+    this.distance = Math.max(0, this.track.scrollWidth - this.viewport.clientWidth);
+    this.step = this.cards[1] ? this.cards[1].offsetLeft - this.cards[0].offsetLeft : 0;
+    if(this.pinned) this.section.style.height = `${this.stage.offsetHeight + this.distance}px`;
     this.update();
   }
   schedule() {
