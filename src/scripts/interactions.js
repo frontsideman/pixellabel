@@ -63,17 +63,6 @@ export function setupPointerInteractions(preferences) {
   },{passive:true});
   document.documentElement.addEventListener('pointerleave',()=>cursor.style.opacity='0');
   preferences.addEventListener('change',()=>cursor.style.opacity='0');
-  document.querySelectorAll('.magnetic').forEach(button=>{
-    button.addEventListener('pointermove',event=>{
-      if(!fine.matches||preferences.reduced)return;
-      const r=button.getBoundingClientRect();
-      const x=Math.max(-8,Math.min(8,(event.clientX-r.left-r.width/2)*.08));
-      const y=Math.max(-8,Math.min(8,(event.clientY-r.top-r.height/2)*.12));
-      button.style.translate=`${x}px ${y}px`;
-    });
-    const reset=()=>button.style.translate='';
-    button.addEventListener('pointerleave',reset);preferences.addEventListener('change',reset);
-  });
   document.querySelectorAll('.project-card').forEach(card=>{
     card.addEventListener('pointermove',event=>{
       if(!fine.matches||preferences.reduced)return;

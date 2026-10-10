@@ -1995,7 +1995,7 @@ html[data-motion="reduced"] .portrait-composition {
 .services-intro { display: block; }
 .services .display { font-size: clamp(72px, 6vw, 132px); margin-bottom: 32px; }
 .services-intro > p:not(.eyebrow):not(.services-script) { font-size: 18px; line-height: 1.55; max-width: 420px; margin-bottom: 30px; }
-.services-cta { gap: 24px; box-shadow: 4px 5px 0 var(--ink); }
+.services-cta { gap: 24px; }
 .services-intro > p.services-script { font-size: 34px; line-height: 1.1; margin-top: 32px; max-width: none; }
 .services-content { min-width: 0; }
 .service-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; padding: 0 5px 8px 0; }
@@ -2072,7 +2072,7 @@ html[data-motion="reduced"] .portrait-composition {
 .collaboration-card > .collaboration-note { margin-top: auto; margin-bottom: 0; border-top: 1px solid #f5e9c433; padding-top: 20px; font-size: 14px; color: var(--yellow); }
 .collaboration-footer { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; margin-top: 40px; }
 .collaboration-footer .script { font-size: 40px; margin: 0; }
-.collaboration-footer .button { gap: 28px; box-shadow: 4px 5px 0 var(--ink); }
+.collaboration-footer .button { gap: 28px; }
 @media (min-width: 1800px) {
   .collaboration { padding-top: 120px; padding-bottom: 130px; }
   .collaboration-card { padding: 40px 34px 34px; }
@@ -2102,8 +2102,6 @@ html[data-motion="reduced"] .portrait-composition {
   .collaboration-grid { grid-template-columns: 1fr; }
 }
 
-.contact-message:hover { box-shadow: 0 4px 0 #13151a30; }
-.contact-message:hover span { transform: none; }
 .neon-sign { -webkit-text-stroke: 1px #3b2418; paint-order: stroke fill; }
 .skills-caption {
   background: #101b20f2;

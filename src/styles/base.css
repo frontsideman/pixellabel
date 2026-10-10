@@ -153,7 +153,7 @@ button:disabled {
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
-  box-shadow: 0 4px 0 #13151a30;
+  box-shadow: 4px 5px 0 var(--ink);
   position: relative;
   isolation: isolate;
   transition:
@@ -167,7 +167,6 @@ button:disabled {
 }
 .button:hover {
   background: #ffe6a6;
-  box-shadow: 0 6px 20px #ffd16630;
 }
 .button:hover span {
   transform: translate(3px, -3px);
