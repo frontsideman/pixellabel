@@ -1,4 +1,4 @@
-import {readFile,writeFile,readdir,copyFile} from 'node:fs/promises';
+import {readFile,writeFile,readdir,copyFile,cp,rm} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 const dist=resolve('dist');
 const types={'.webp':'image/webp','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2','.ico':'image/x-icon'};
@@ -6,6 +6,8 @@ const cache=new Map();
 async function embed(path){const file=resolve(dist,path);if(!cache.has(file)){const bytes=await readFile(file);cache.set(file,`data:${types[extname(file)]};base64,${bytes.toString('base64')}`);}return cache.get(file);}
 const files=await readdir(resolve(dist,'assets'));
 let html=await readFile(resolve(dist,'index.html'),'utf8');
+// The lightweight Vite output stays the published entry: crawlers download the whole document.
+const entry=html;
 let css=await readFile(resolve(dist,'assets',files.find(f=>f.endsWith('.css'))),'utf8');
 let js=await readFile(resolve(dist,'assets',files.find(f=>f.endsWith('.js'))),'utf8');
 for(const match of [...css.matchAll(/url\(([^)]+)\)/g)]){const path=match[1].replace(/^['"]|['"]$/g,'');if(path.startsWith('data:'))continue;const uri=await embed('assets/'+path);css=css.replace(match[0],`url("${uri}")`);}
@@ -25,8 +27,13 @@ for(const name of ['favicon.svg','favicon.ico','favicon-32.png','apple-touch-ico
 }
 html=html.replace('</body>',`<script>${js.replaceAll('</script','<\\/script')}</script>\n</body>`);
 html=html.replace(/^[\t ]+$/gm,'');
-await writeFile('index.html',html);
-await writeFile(resolve(dist,'index.html'),html);
+await writeFile('index.html',entry);
+await writeFile(resolve(dist,'index.html'),entry);
 await writeFile('portfolio.html',html);
 await writeFile(resolve(dist,'portfolio.html'),html);
-console.log(`Standalone index.html and portfolio.html generated (${(Buffer.byteLength(html)/1024/1024).toFixed(1)} MB)`);
+// Publish the static folders the lightweight entry references, so the repository root serves the site.
+for(const folder of ['assets','artwork','fonts','icons']){
+  await rm(resolve(folder),{recursive:true,force:true});
+  await cp(resolve(dist,folder),resolve(folder),{recursive:true});
+}
+console.log(`Lightweight index.html (${(Buffer.byteLength(entry)/1024).toFixed(1)} KB) and static folders published to the repository root; standalone portfolio.html generated (${(Buffer.byteLength(html)/1024/1024).toFixed(1)} MB)`);

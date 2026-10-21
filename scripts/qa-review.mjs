@@ -138,6 +138,29 @@ try {
       (await sitemap.text()).includes("<loc>https://pixellabel.com/</loc>"),
       "sitemap lists the canonical URL",
     );
+    // Crawlers download the whole document, so the published entry must stay small.
+    const entry = await page.request.get(origin + "/");
+    const entryHtml = await entry.text();
+    assert(
+      entryHtml.length < 200000,
+      `published entry is ${entryHtml.length} bytes`,
+    );
+    assert(
+      entryHtml.includes('property="og:site_name"'),
+      "published entry carries social metadata",
+    );
+    if (origin.endsWith("4173")) {
+      const standalone = await page.request.get(origin + "/portfolio.html");
+      const standaloneHtml = await standalone.text();
+      assert(
+        standaloneHtml.includes("data:image/webp;base64"),
+        "standalone artifact embeds artwork",
+      );
+      assert(
+        standaloneHtml.includes('property="og:site_name"'),
+        "standalone artifact carries social metadata",
+      );
+    }
     assert.equal(await page.locator(".service[tabindex]").count(), 0);
     for (const width of [320, 375, 768, 1296]) {
       await page.setViewportSize({ width, height: 773 });
@@ -163,7 +186,7 @@ try {
       );
     }
     console.log(
-      `${origin}: full social metadata, structured data, sitemap/robots, 6 branding assets, service semantics and readable responsive type passed`,
+      `${origin}: full social metadata, structured data, sitemap/robots, lightweight entry, 6 branding assets, service semantics and readable responsive type passed`,
     );
   }
   for (const total of [0, 1]) {
