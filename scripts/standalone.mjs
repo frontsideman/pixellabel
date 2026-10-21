@@ -20,7 +20,7 @@ for(const path of new Set([...html.matchAll(/\.\/(?:artwork|icons|fonts)\/[a-zA-
 for(const name of ['favicon.svg','favicon.ico','apple-touch-icon.png']){
   html=html.replaceAll(`./${name}`,await embed(name));
 }
-for(const name of ['favicon.svg','favicon.ico','favicon-32.png','apple-touch-icon.png','og-image.jpg']){
+for(const name of ['favicon.svg','favicon.ico','favicon-32.png','apple-touch-icon.png','og-image.jpg','robots.txt','sitemap.xml']){
   await copyFile(resolve(dist,name),resolve(name));
 }
 html=html.replace('</body>',`<script>${js.replaceAll('</script','<\\/script')}</script>\n</body>`);

@@ -32,16 +32,112 @@ try {
         await page.locator(selector).getAttribute("content"),
         "https://pixellabel.com/og-image.jpg",
       );
+    for (const [selector, value] of [
+      ['meta[property="og:type"]', "website"],
+      ['meta[property="og:site_name"]', "Alex Sekunau"],
+      ['meta[property="og:locale"]', "en_US"],
+      ['meta[property="og:title"]', "Aliaksandr Sekunau | Senior Frontend Engineer"],
+      ['meta[property="og:image:secure_url"]', "https://pixellabel.com/og-image.jpg"],
+      ['meta[property="og:image:type"]', "image/jpeg"],
+      ['meta[property="og:image:width"]', "1200"],
+      ['meta[property="og:image:height"]', "630"],
+      ['meta[property="og:image:alt"]', "Alex Sekunau — illustrated frontend engineer portfolio"],
+      ['meta[name="twitter:card"]', "summary_large_image"],
+      ['meta[name="twitter:title"]', "Aliaksandr Sekunau | Senior Frontend Engineer"],
+      ['meta[name="twitter:image:alt"]', "Alex Sekunau — illustrated frontend engineer portfolio"],
+      ['meta[name="author"]', "Aliaksandr Sekunau"],
+    ])
+      assert.equal(
+        await page.locator(selector).getAttribute("content"),
+        value,
+        selector,
+      );
+    assert.equal(
+      await page.locator('meta[name="robots"]').getAttribute("content"),
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    );
+    assert.equal(
+      await page.locator('link[rel="sitemap"]').getAttribute("href"),
+      "https://pixellabel.com/sitemap.xml",
+    );
+    assert.equal(
+      await page.locator('meta[property="og:description"]').getAttribute("content"),
+      await page.locator('meta[name="twitter:description"]').getAttribute("content"),
+    );
+    const title = await page.title();
+    assert(title.length <= 60 && title.length >= 20, `title length ${title.length}`);
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    assert(
+      description.length >= 120 && description.length <= 160,
+      `description length ${description.length}`,
+    );
+    const ogDescription = await page
+      .locator('meta[property="og:description"]')
+      .getAttribute("content");
+    assert(
+      ogDescription.length >= 60 && ogDescription.length <= 120,
+      `og description length ${ogDescription.length}`,
+    );
+    const structured = JSON.parse(
+      await page.locator('script[type="application/ld+json"]').textContent(),
+    );
+    assert.equal(structured["@context"], "https://schema.org");
+    const graph = structured["@graph"];
+    assert.deepEqual(
+      graph.map((node) => node["@type"]),
+      ["WebSite", "ProfilePage", "Person"],
+    );
+    const person = graph.find((node) => node["@type"] === "Person");
+    assert.equal(person.url, "https://pixellabel.com/");
+    assert.equal(person.image, "https://pixellabel.com/og-image.jpg");
+    assert.equal(person.jobTitle, "Senior Frontend Engineer");
+    assert.deepEqual(person.sameAs, [
+      "https://github.com/frontsideman",
+      "https://www.linkedin.com/in/alexandr-sekunov/",
+      "https://t.me/Frontend_React_Vue",
+    ]);
+    assert.equal(
+      graph.find((node) => node["@type"] === "ProfilePage").mainEntity["@id"],
+      person["@id"],
+    );
+    assert.equal(
+      graph.find((node) => node["@type"] === "WebSite")["@id"],
+      graph.find((node) => node["@type"] === "ProfilePage").isPartOf["@id"],
+    );
+    const ogSize = await page.evaluate(
+      () =>
+        new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => resolve([image.naturalWidth, image.naturalHeight]);
+          image.onerror = () => resolve([0, 0]);
+          image.src = "/og-image.jpg";
+        }),
+    );
+    assert.deepEqual(ogSize, [1200, 630]);
     for (const path of [
       "/favicon.svg",
       "/favicon.ico",
       "/apple-touch-icon.png",
       "/og-image.jpg",
+      "/robots.txt",
+      "/sitemap.xml",
     ]) {
       const response = await page.request.get(origin + path);
       assert.equal(response.status(), 200, path);
       assert(!response.headers()["content-type"].includes("text/html"), path);
     }
+    const robots = await page.request.get(origin + "/robots.txt");
+    assert(
+      (await robots.text()).includes("Sitemap: https://pixellabel.com/sitemap.xml"),
+      "robots.txt points to the sitemap",
+    );
+    const sitemap = await page.request.get(origin + "/sitemap.xml");
+    assert(
+      (await sitemap.text()).includes("<loc>https://pixellabel.com/</loc>"),
+      "sitemap lists the canonical URL",
+    );
     assert.equal(await page.locator(".service[tabindex]").count(), 0);
     for (const width of [320, 375, 768, 1296]) {
       await page.setViewportSize({ width, height: 773 });
@@ -67,7 +163,7 @@ try {
       );
     }
     console.log(
-      `${origin}: social metadata, 4 branding assets, service semantics and readable responsive type passed`,
+      `${origin}: full social metadata, structured data, sitemap/robots, 6 branding assets, service semantics and readable responsive type passed`,
     );
   }
   for (const total of [0, 1]) {

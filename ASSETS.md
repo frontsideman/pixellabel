@@ -69,4 +69,4 @@ No essential copy is baked into imagery. Responsive picture sources, image dimen
 
 ### Favicon and social sharing assets
 
-The favicon is an original SVG AS monogram in the portfolio palette. Browser-rendered PNG exports provide 32px and 180px Apple touch variants; the ICO contains 16px and 32px sizes. og-image.jpg is a 1200×630 browser-rendered JPEG export of the existing original hero illustration. The standalone builder embeds icon resources and copies public branding assets into the repository root for hosting alongside index.html.
+The favicon is an original SVG AS monogram in the portfolio palette. Browser-rendered PNG exports provide 32px and 180px Apple touch variants; the ICO contains 16px and 32px sizes. og-image.jpg is a 1200×630 browser-rendered JPEG export of the existing original hero illustration; it is the single social preview source shared by the Open Graph image properties, the Twitter card and the JSON-LD `Person` image, so its 1200×630 dimensions must stay unchanged. The standalone builder embeds icon resources and copies public branding assets, robots.txt and sitemap.xml into the repository root for hosting alongside index.html.
