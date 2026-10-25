@@ -17,6 +17,8 @@ let js=await readFile(resolve(dist,'assets',files.find(f=>f.endsWith('.js'))),'u
 for(const match of [...css.matchAll(/url\(([^)]+)\)/g)]){const path=match[1].replace(/^['"]|['"]$/g,'');if(path.startsWith('data:'))continue;const uri=await embed('assets/'+path);css=css.replace(match[0],`url("${uri}")`);}
 const artwork={};
 for(const name of await readdir(resolve(dist,'artwork'))){if(name.endsWith('.webp'))artwork[name.slice(0,-5)]=await embed('artwork/'+name);}
+const requiredArtwork=['hero','about','skills','experience','services','projects','contact','allergenchecker','competitions','aibook','auto','consensus','bixbit'];
+for(const name of requiredArtwork){if(!artwork[name])throw new Error(`Missing artwork required by navigation or dialogs: ${name}.webp`);}
 // Vite resolves BASE_URL to ./ in the browser bundle; substitute the three dynamic image paths.
 js=js.replace(/`\.\/artwork\/\$\{([^}]+)\}\.webp`/g,(_,expression)=>`portfolioArtwork[${expression}]`);
 if(js.includes('`./artwork/'))throw new Error('Unresolved dynamic artwork path');

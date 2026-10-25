@@ -31,6 +31,7 @@ All illustrative imagery was created for this portfolio during this session. The
 | plane.svg | 120 × 50 | SVG + alpha | Original hand-authored vector distant aircraft; separate ambient plane. |
 | projects-mobile.webp | 750 × 1000 | WEBP | Mobile export of projects scene; intentional portrait crop. |
 | projects.webp | 768 × 512 | WEBP | Original generated scene atlas, bottom-left sunset boulevard. |
+| services.webp | 700 × 330 | WEBP | Optimized landscape crop of the original hero illustration; Services menu artwork. |
 | skills-mobile.webp | 750 × 1000 | WEBP | Mobile export of skills scene; intentional portrait crop. |
 | skills.webp | 768 × 512 | WEBP | Original generated scene atlas, top-right city/highway. |
 | traffic.svg | 140 × 45 | SVG + alpha | Original hand-authored vector distant retro car; separate ambient plane. |

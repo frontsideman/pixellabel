@@ -3,13 +3,23 @@ import { existsSync } from 'node:fs';
 
 const url = process.env.QA_URL || 'http://localhost:4173/';
 const localChrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const requestedExecutable = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+const executablePath = requestedExecutable && existsSync(requestedExecutable)
+  ? requestedExecutable
+  : existsSync(localChrome)
+    ? localChrome
+    : undefined;
 const browser = await chromium.launch({
   headless: true,
-  ...(existsSync(localChrome) ? { executablePath: localChrome } : {}),
+  ...(executablePath ? { executablePath } : {}),
 });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 const passed = [];
 const failed = [];
+const failedArtwork = [];
+page.on('response', response => {
+  if (response.status() >= 400 && response.url().includes('/artwork/')) failedArtwork.push(response.url());
+});
 const check = (name, value) => (value ? passed : failed).push(name);
 
 try {
@@ -74,6 +84,11 @@ try {
     (await menuToggle.getAttribute('aria-label')) === 'Close navigation menu' &&
       (await page.locator('#menu').evaluate(dialog => dialog.open)),
   );
+  for (const link of await page.locator('#menu [data-menu-theme]').all()) {
+    await link.focus();
+    await page.waitForTimeout(250);
+  }
+  check('Every menu theme artwork loads', failedArtwork.length === 0);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(150);
   check(
@@ -86,6 +101,14 @@ try {
     await page.evaluate(() =>
       [...document.fonts].some(
         font => font.family.replace(/["']/g, '') === 'DM Sans' && font.weight.includes(' '),
+      ),
+    ),
+  );
+  check(
+    'Caveat exposes a variable weight axis',
+    await page.evaluate(() =>
+      [...document.fonts].some(
+        font => font.family.replace(/["']/g, '') === 'Caveat' && font.weight.includes(' '),
       ),
     ),
   );
