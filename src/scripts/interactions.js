@@ -135,3 +135,57 @@ export function setupScrollScenes(preferences) {
   });
   update();
 }
+
+export function setupSkills(preferences) {
+  const techs = [...document.querySelectorAll('.tech')];
+  const fine = matchMedia('(pointer: fine)');
+  const reset = () => techs.forEach(tech => tech.classList.remove('related', 'dimmed'));
+  techs.forEach(tech => {
+    tech.addEventListener('pointerenter', () => {
+      if (!fine.matches || preferences.reduced) return;
+      const family = tech.dataset.family;
+      if (family === 'all') return;
+      techs.forEach(other => {
+        other.classList.toggle('related', other.dataset.family === family);
+        other.classList.toggle('dimmed', other.dataset.family !== family && other.dataset.family !== 'all');
+      });
+    });
+    tech.addEventListener('pointerleave', reset);
+  });
+  preferences.addEventListener('change', reset);
+}
+
+export function setupServices(preferences) {
+  const section = document.querySelector('.services');
+  const preview = section?.querySelector('.service-preview');
+  if (!section || !preview) return;
+  const image = preview.querySelector('img');
+  const fine = matchMedia('(pointer: fine)');
+  const assets = { apps: 'consensus', ui: 'about', architecture: 'bixbit', review: 'experience', mvp: 'competitions', performance: 'auto' };
+  const colors = { apps: '#f5e5bc', ui: '#f4e1c5', architecture: '#e9e9c9', review: '#f0e2c7', mvp: '#f3e4cb', performance: '#e6e8c5' };
+  let active = false;
+  section.querySelectorAll('.service').forEach(service => {
+    const key = service.dataset.service;
+    const activate = () => {
+      if (!fine.matches || preferences.reduced || !key) return;
+      active = true;
+      section.style.backgroundColor = colors[key] || '';
+      image.src = `${import.meta.env.BASE_URL}artwork/${assets[key] || 'consensus'}.webp`;
+    };
+    service.addEventListener('pointerenter', activate);
+    service.addEventListener('pointermove', event => {
+      if (!active || !fine.matches || preferences.reduced) return;
+      const bounds = section.getBoundingClientRect();
+      preview.style.left = `${Math.min(bounds.width - 110, Math.max(100, event.clientX - bounds.left - 100))}px`;
+      preview.style.top = `${Math.max(80, event.clientY - bounds.top - 110)}px`;
+      preview.style.opacity = '1';
+    });
+    const reset = () => {
+      active = false;
+      section.style.backgroundColor = '';
+      preview.style.opacity = '0';
+    };
+    service.addEventListener('pointerleave', reset);
+    preferences.addEventListener('change', reset);
+  });
+}

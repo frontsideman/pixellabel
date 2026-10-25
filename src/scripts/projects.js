@@ -3,7 +3,7 @@ import { lockScroll, unlockScroll } from './scroll-lock.js';
 const projects = {
   allergenchecker: { title: 'AllergenChecker', category: '5.1 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
   competition: { title: 'Competition', category: '5.2 / iOS application', asset: 'competitions', description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
-  aibook: { title: 'AIBook', category: '5.3 / Product development', asset: 'aibook', description: 'Created AIBook.', stack: ['Product development'] },
+  aibook: { title: 'AIBook', category: '5.3 / Product development', asset: 'aibook', description: 'Product development for AIBook.', stack: ['Product development'] },
   auto: { title: 'BestAutoService.by', category: '5.4 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'], url: 'https://bestautoservice.by/' }
 };
 export class HorizontalProjects {
@@ -98,10 +98,11 @@ export class HorizontalProjects {
 }
 export function setupProjectDialogs() {
   const dialog = document.querySelector('#project-dialog');
-  let returnFocus;
+  let returnFocus, activeTrigger;
   document.querySelectorAll('.project-open').forEach(button => button.addEventListener('click', () => {
     const data = projects[button.closest('[data-project]').dataset.project];
-    returnFocus = button;
+    returnFocus = activeTrigger = button;
+    button.setAttribute('aria-expanded', 'true');
     dialog.querySelector('#project-dialog-title').textContent = data.title;
     dialog.querySelector('.dialog-category').textContent = data.category;
     dialog.querySelector('.dialog-description').textContent = data.description;
@@ -116,6 +117,11 @@ export function setupProjectDialogs() {
   }));
   dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if(event.target === dialog) { const r = dialog.getBoundingClientRect(); if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close(); } });
-  dialog.addEventListener('close', () => { unlockScroll(dialog); returnFocus?.focus({preventScroll:true}); });
+  dialog.addEventListener('close', () => {
+    activeTrigger?.setAttribute('aria-expanded', 'false');
+    activeTrigger = undefined;
+    unlockScroll(dialog);
+    returnFocus?.focus({preventScroll:true});
+  });
   window.addEventListener('popstate', () => { if(dialog.open) dialog.close(); });
 }

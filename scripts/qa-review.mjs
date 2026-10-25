@@ -1,11 +1,17 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+const localChrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const requestedExecutable = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+const executablePath = requestedExecutable && existsSync(requestedExecutable)
+  ? requestedExecutable
+  : existsSync(localChrome)
+    ? localChrome
+    : undefined;
 const browser = await chromium.launch({
   headless: true,
-  executablePath:
-    process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ||
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  ...(executablePath ? { executablePath } : {}),
 });
 try {
   const page = await browser.newPage({
@@ -123,11 +129,17 @@ try {
       "/og-image.jpg",
       "/robots.txt",
       "/sitemap.xml",
+      "/CNAME",
     ]) {
       const response = await page.request.get(origin + path);
       assert.equal(response.status(), 200, path);
       assert(!response.headers()["content-type"].includes("text/html"), path);
     }
+    assert.equal(
+      (await (await page.request.get(origin + "/CNAME")).text()).trim(),
+      "pixellabel.com",
+      "CNAME content",
+    );
     const robots = await page.request.get(origin + "/robots.txt");
     assert(
       (await robots.text()).includes("Sitemap: https://pixellabel.com/sitemap.xml"),
@@ -160,6 +172,10 @@ try {
         standaloneHtml.includes('property="og:site_name"'),
         "standalone artifact carries social metadata",
       );
+      assert(
+        standaloneHtml.includes('<meta name="robots" content="noindex'),
+        "standalone artifact is excluded from search indexes",
+      );
     }
     assert.equal(await page.locator(".service[tabindex]").count(), 0);
     for (const width of [320, 375, 768, 1296]) {
@@ -186,7 +202,7 @@ try {
       );
     }
     console.log(
-      `${origin}: full social metadata, structured data, sitemap/robots, lightweight entry, 6 branding assets, service semantics and readable responsive type passed`,
+      `${origin}: full social metadata, structured data, sitemap/robots, lightweight entry, 7 published root assets, service semantics and readable responsive type passed`,
     );
   }
   for (const total of [0, 1]) {

@@ -8,6 +8,10 @@ const files=await readdir(resolve(dist,'assets'));
 let html=await readFile(resolve(dist,'index.html'),'utf8');
 // The lightweight Vite output stays the published entry: crawlers download the whole document.
 const entry=html;
+// Fonts are embedded through the stylesheet; hashed preload URLs would not resolve inside the single file.
+html=html.replace(/<link rel="preload"[^>]*\bas="font"[^>]*>/g,'');
+// The standalone file is a sharing artifact, not a second search result.
+html=html.replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex, follow">');
 let css=await readFile(resolve(dist,'assets',files.find(f=>f.endsWith('.css'))),'utf8');
 let js=await readFile(resolve(dist,'assets',files.find(f=>f.endsWith('.js'))),'utf8');
 for(const match of [...css.matchAll(/url\(([^)]+)\)/g)]){const path=match[1].replace(/^['"]|['"]$/g,'');if(path.startsWith('data:'))continue;const uri=await embed('assets/'+path);css=css.replace(match[0],`url("${uri}")`);}

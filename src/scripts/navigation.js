@@ -10,11 +10,11 @@ export function setupNavigation() {
   const toggle = document.querySelector('.menu-toggle');
   const images = [...dialog.querySelectorAll('.menu-image')];
   let front = 0, request = 0, focusReturn;
-  const open = () => { focusReturn = document.activeElement; dialog.showModal(); lockScroll(dialog); toggle.setAttribute('aria-expanded', 'true'); };
+  const open = () => { focusReturn = document.activeElement; dialog.showModal(); lockScroll(dialog); toggle.setAttribute('aria-expanded', 'true'); toggle.setAttribute('aria-label', 'Close navigation menu'); };
   const close = () => dialog.close();
   toggle.addEventListener('click', open);
   dialog.querySelector('.menu-close').addEventListener('click', close);
-  dialog.addEventListener('close', () => { unlockScroll(dialog); toggle.setAttribute('aria-expanded', 'false'); focusReturn?.focus({ preventScroll: true }); });
+  dialog.addEventListener('close', () => { unlockScroll(dialog); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation menu'); focusReturn?.focus({ preventScroll: true }); });
   for(const link of dialog.querySelectorAll('nav a')) {
     const theme = () => {
       const [asset, color] = worlds[link.dataset.menuTheme];
@@ -44,7 +44,7 @@ export function setupNavigation() {
     const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top-b.boundingClientRect.top);
     if (!visible.length) return;
     const id = visible[0].target.id;
-    navLinks.forEach(link => { if(link.hash === `#${id}`) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current'); });
+    navLinks.forEach(link => { if(link.hash === `#${id}`) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
   }, { rootMargin: '-15% 0px -55% 0px' });
   sections.forEach(section => observer.observe(section));
   window.addEventListener('popstate', () => { if(dialog.open) close(); });

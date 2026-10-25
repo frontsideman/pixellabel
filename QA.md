@@ -1,21 +1,25 @@
-# Verification — 9 October 2026
+# Verification — 26 October 2026
 
 Production output built successfully with `npm run build`, and served successfully with `npm run preview`. The local development server also runs successfully. npm installation completed; no vulnerable dependencies were reported by npm at installation time.
 
 ## Browser checks
 
-The initial version passed 35 end-to-end checks. After the CV/project update, 41 checks passed in local Chromium, with no uncaught JavaScript errors or failed local asset responses. The current report and screenshots are in `qa-artifacts/`; the initial report is preserved as results-initial.json. The unchanged 60-second ambient benchmark was not repeated for this content update.
+The current suite has 45 core browser checks plus 26 polish checks, with no uncaught JavaScript errors or failed local asset responses. The initial version passed 35 checks; the CV/project update passed 41. The current report and screenshots are in `qa-artifacts/`; the initial report is preserved as results-initial.json. The unchanged 60-second ambient benchmark was not repeated for this content update.
 
-- All seven sections and one main heading; all requested imagery loads.
+- All eight sections and one main heading; all requested imagery loads.
 - Desktop pinned panorama reaches the final card and returns to ordinary document flow.
 - Project details open with the correct content; Escape closes and restores focus.
 - Fullscreen menu opens, contains focus through a native dialog, closes with Escape or an anchor and restores/navigates focus appropriately.
 - Keyboard focus crossfades menu artwork and changes its palette.
 - Both marquee groups have equal rendered widths; their loop translation is exactly half of a two-group track. Interactive contact CTA stays stationary.
 - Ambient scenes pause outside the viewport. Hidden-document lifecycle handler was exercised with a synthetic visibilitychange; an actual background-tab/battery study was not performed.
-- Motion toggle stops animations and pinning, persists on reload; system reduced motion is honored on first load.
+- Motion is enabled by default even when the OS requests reduced motion; the manual toggle stops animations and pinning and persists on reload.
 - No document overflow and no clipped heading words at 320, 375, 768, 1024, 1440, 1920 and 2560 CSS px.
-- No-JS and blocked-artwork fallbacks retain semantic information and valid contact destinations.
+- Project triggers expose concise `aria-label`, `aria-haspopup`, `aria-controls` and `aria-expanded` state.
+- Related-stack highlights, service artwork previews and service palette changes respond to pointer and reset on leave.
+- DM Sans and Caveat load as variable fonts; UI transitions follow the `--motion-speed` token.
+- The published root serves `CNAME`; the standalone artifact is `noindex`.
+- Without JS, content and contact links remain available; the mobile menu and project dialogs require JavaScript. Blocked-artwork fallbacks retain semantic information and valid contact destinations.
 - 60-second idle observation: clouds kept moving; measured JavaScript execution was 0 seconds. Browser task time was 5.93 seconds; JS heap approximately 2.29 MB. These are local Chromium CDP measurements, not a mobile battery benchmark.
 
 ## Lighthouse baseline
@@ -48,7 +52,7 @@ Mobile performance improved from an initial 74 after reducing eager overlay down
 - Added AllergenChecker, AIBook and the corporate/marketing website with a blog on Nuxt + Directus; updated the existing Competition card to the user’s singular product name and iOS platform.
 - Verified that AllergenChecker’s description includes barcode scans and ingredient-list photographs. No accuracy, safety or medical-outcome claim is added.
 - All four added/updated project dialogs were tested at 375px with reduced motion.
-- Verified eight career entries, CV email/Telegram destinations, production build, image loading and the seven responsive widths.
+- Verified eight career entries, Telegram/LinkedIn/GitHub destinations, production build, image loading and the seven responsive widths.
 - AIBook’s detailed functionality and technology stack and the corporate website’s brand have not been provided. Their descriptions remain limited to confirmed information.
 - The CV itself was read as a source and is not included in public assets. Implausible or unnecessary quantified claims from the CV were not reproduced.
 
@@ -166,10 +170,10 @@ The head now carries a complete sharing set: canonical, description, author and 
 
 robots.txt now allows crawling and points to a new sitemap.xml listing the canonical URL. Both files are copied to the repository root by the build, because static hosting serves the repository root; before this change robots.txt returned 404 on the live domain. The production build, all 46 browser checks and the metadata review passed on the development and preview origins without runtime errors or failed assets. The review script now asserts the whole metadata set, title and description lengths, the structured-data graph, the og-image dimensions and the sitemap/robots responses.
 
-Not verified here: messenger rendering, which depends on each platform's crawler and cache. After publishing, re-scrape with Facebook's Sharing Debugger and paste the link with a cache-busting query parameter in Telegram, WhatsApp, Slack and Discord. The standalone page remains a single 7.9 MB file, so crawlers still download the whole document; this was reviewed and left unchanged by decision.
+Not verified here: messenger rendering, which depends on each platform's crawler and cache. After publishing, re-scrape with Facebook's Sharing Debugger and paste the link with a cache-busting query parameter in Telegram, WhatsApp, Slack and Discord. The standalone page remains a single 7.5 MB file, so crawlers still download the whole document; this was reviewed and left unchanged by decision.
 
 ### Lightweight published entry
 
-The published entry is now the lightweight Vite output (39.6 KB) with `assets/`, `artwork/`, `fonts/` and `icons/` published beside it in the repository root, because link-preview crawlers download the entire document before they read the Open Graph tags. The standalone single-file artifact moved to portfolio.html and still opens by double-clicking; it keeps the identical head. The previous setup served the 7.9 MB standalone file as the site entry, and Telegram showed no preview for it although every crawler received HTTP 200 with valid metadata, which matches the reported Telegram-side preview failures.
+The published entry is now the lightweight Vite output (41.6 KB) with `assets/`, `artwork/`, `icons/` and font licenses published beside it in the repository root, because link-preview crawlers download the entire document before they read the Open Graph tags. The standalone single-file artifact moved to portfolio.html and still opens by double-clicking; it keeps the same social metadata and is marked `noindex`. The previous setup served the 7.9 MB standalone file as the site entry, and Telegram showed no preview for it although every crawler received HTTP 200 with valid metadata, which matches the reported Telegram-side preview failures.
 
-Verified: the production build publishes a 39.6 KB index.html and a 7.9 MB portfolio.html; all 45 browser checks pass against the repository-root layout that static hosting serves, with no runtime errors and no failed assets; the same checks pass against the preview server and the development server; the standalone file loads from file:// with 46 of 52 images rendered and no JavaScript errors. The review script now fails if the published entry grows past 200 KB, and checks that the standalone artifact keeps embedded artwork and the social metadata. Not verified here: the rendering of the preview inside each messenger, which depends on the platform crawler and its cache.
+Verified: the production build publishes a 41.6 KB index.html and a 7.5 MB portfolio.html; all 45 core and 26 polish checks pass against the repository-root layout that static hosting serves, with no runtime errors and no failed assets; the same checks pass against the preview server and the development server; the standalone file loads from file:// with all embedded images rendered and no JavaScript errors. The review script now fails if the published entry grows past 200 KB, and checks that the standalone artifact keeps embedded artwork, carries the social metadata and is marked `noindex`. Not verified here: the rendering of the preview inside each messenger, which depends on the platform crawler and its cache.

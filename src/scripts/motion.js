@@ -16,7 +16,6 @@ export class MotionPreferences extends EventTarget {
   }
   apply() {
     document.documentElement.dataset.motion = this.mode;
-    this.button.textContent = `Motion: ${this.reduced ? 'Reduced' : 'On'}`;
     this.button.setAttribute('aria-pressed', String(this.reduced));
   }
 }

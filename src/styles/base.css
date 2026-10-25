@@ -7,15 +7,15 @@
 }
 @font-face {
   font-family: "DM Sans";
-  src: url("../fonts/dm-sans.woff2") format("woff2");
+  src: url("../fonts/dm-sans-variable.woff2") format("woff2");
   font-display: swap;
-  font-weight: 400;
+  font-weight: 100 1000;
 }
 @font-face {
   font-family: Caveat;
-  src: url("../fonts/caveat.woff2") format("woff2");
+  src: url("../fonts/caveat-variable.woff2") format("woff2");
   font-display: swap;
-  font-weight: 700;
+  font-weight: 400 700;
 }
 :root {
   --ink: #13151a;
@@ -27,6 +27,7 @@
   --display: Anton, "Arial Narrow", Impact, sans-serif;
   --body: "DM Sans", Arial, sans-serif;
   --motion-speed: 1;
+  --motion-duration: calc(500ms / var(--motion-speed));
   --sky-color: #ff648f;
   --line: rgba(19, 21, 26, 0.22);
 }
@@ -44,6 +45,7 @@ body {
   font-family: var(--body);
   font-size: 16px;
   line-height: 1.45;
+  font-synthesis: none;
   overflow-x: clip;
 }
 body.scroll-locked {

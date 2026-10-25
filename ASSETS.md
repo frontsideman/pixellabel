@@ -16,7 +16,6 @@ All illustrative imagery was created for this portfolio during this session. The
 | about.webp | 768 × 512 | WEBP | Original generated scene atlas, top-left portrait. |
 | auto.webp | 512 × 512 | WEBP | Original generated project atlas, bottom-middle workshop concept. |
 | bixbit.webp | 512 × 512 | WEBP | Original generated project atlas, top-middle architecture illustration. |
-| city-sketch.webp | 550 × 367 | WEBP | Optimized responsive export of an original generated scene. |
 | clouds.svg | 1200 × 220 | SVG + alpha | Original hand-authored vector cloud silhouettes; separate ambient plane. |
 | competitions.webp | 512 × 512 | WEBP | Original generated project atlas, top-right mobile-product concept. |
 | consensus.webp | 512 × 512 | WEBP | Original generated project atlas, top-left office illustration. |
@@ -25,28 +24,24 @@ All illustrative imagery was created for this portfolio during this session. The
 | experience.webp | 512 × 512 | WEBP | Original generated project atlas, bottom-right career portrait. |
 | hero-background-mobile.webp | 600 × 920 | WEBP | Portrait-oriented WebP export of clean background. |
 | hero-background.webp | 1672 × 941 | WEBP | Generated edit of hero with car and character removed. |
-| hero-mobile.webp | 750 × 1150 | WEBP | Initial reference export; retained as an optional alternate crop. |
 | hero-subject-mobile.webp | 850 × 682 | WEBP + alpha | Transparent mobile foreground crop, separately composed in CSS. |
 | hero-subject.webp | 1672 × 941 | WEBP + alpha | Generated transparent extraction: original character, laptop and lowrider. |
-| hero.webp | 1672 × 941 | WEBP | Original generated hero illustration; navigation world and services crop source. |
+| hero.webp | 1672 × 941 | WEBP | Original generated hero illustration; navigation world. |
 | palm.svg | 220 × 540 | SVG + alpha | Original hand-authored vector palm silhouette; separate ambient plane. |
 | plane.svg | 120 × 50 | SVG + alpha | Original hand-authored vector distant aircraft; separate ambient plane. |
 | projects-mobile.webp | 750 × 1000 | WEBP | Mobile export of projects scene; intentional portrait crop. |
 | projects.webp | 768 × 512 | WEBP | Original generated scene atlas, bottom-left sunset boulevard. |
-| services.webp | 700 × 330 | WEBP | Optimized landscape crop of original hero illustration. |
 | skills-mobile.webp | 750 × 1000 | WEBP | Mobile export of skills scene; intentional portrait crop. |
 | skills.webp | 768 × 512 | WEBP | Original generated scene atlas, top-right city/highway. |
 | traffic.svg | 140 × 45 | SVG + alpha | Original hand-authored vector distant retro car; separate ambient plane. |
-| youtube.webp | 512 × 512 | WEBP | Original generated project atlas, bottom-left listener portrait. |
 | allergenchecker.webp | 600 × 600 | WEBP | Original generated project atlas, left food/barcode concept; optimized export. |
 | aibook.webp | 600 × 600 | WEBP | Original generated project atlas, middle book-and-software concept; optimized export. |
-| corporate.webp | 600 × 600 | WEBP | Original generated project atlas, right corporate website/blog concept; optimized export. |
 
 Hero art is split into a clean city background and a transparent car/character foreground. Clouds, sun haze, sky ambience, aircraft and palm are independent layers. The far and near skyline and road are painted together in the city plate; the developer and vehicle share the transparent foreground. Other scenes use independent art, CSS overlays and vector accents. This is a deliberate layer consolidation, not a claim that every named item in the brief has its own asset file.
 
 ## Fonts and interface graphics
 
-Anton (display), DM Sans (body) and Caveat (script) were downloaded from Google Fonts, Latin-subset and exported to locally hosted WOFF2. Original TTFs and full SIL Open Font License notices are included in public/fonts. No trademarked game font is used. Technology marks are locally hosted SVGs from Simple Icons (CC0), the official Pinia website, the official TanStack brand assets, and Devicon (MIT) for AWS. Vuex uses the Vue mark and SwiftUI uses the Swift mark. HTML and CSS have separate logos. Service icons are Lucide SVGs (ISC); license notices are included in public/icons. The favicon, interface geometry, GitHub mark and grain texture are vectors.
+Anton (display), DM Sans (body) and Caveat (script) were downloaded from Google Fonts, Latin-subset and exported to locally hosted WOFF2. DM Sans and Caveat are variable fonts: DM Sans covers weights 100–1000 and Caveat 400–700; Anton remains a single 400 weight. The WOFF2 files live in `src/fonts/`, and the full SIL Open Font License notices are included in `public/fonts`. No trademarked game font is used. Technology marks are locally hosted SVGs from Simple Icons (CC0), the official Pinia website, the official TanStack brand assets, and Devicon (MIT) for AWS. Vuex uses the Vue mark and SwiftUI uses the Swift mark. HTML and CSS have separate logos. Service icons are Lucide SVGs (ISC); license notices are included in public/icons. The favicon, interface geometry, GitHub mark and grain texture are vectors.
 
 ## Generation sources
 
