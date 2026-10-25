@@ -84,11 +84,27 @@ try {
     (await menuToggle.getAttribute('aria-label')) === 'Close navigation menu' &&
       (await page.locator('#menu').evaluate(dialog => dialog.open)),
   );
+  const menuArtwork = {
+    home: 'hero',
+    about: 'about',
+    skills: 'skills',
+    experience: 'experience',
+    services: 'services',
+    projects: 'projects',
+    collaboration: 'about',
+    contact: 'contact',
+  };
+  const menuFailures = [];
   for (const link of await page.locator('#menu [data-menu-theme]').all()) {
+    const theme = await link.getAttribute('data-menu-theme');
     await link.focus();
-    await page.waitForTimeout(250);
+    await page.waitForTimeout(350);
+    const activeImage = page.locator('#menu .menu-image.active');
+    const source = (await activeImage.getAttribute('src')) || '';
+    const loaded = await activeImage.evaluate(image => image.complete && image.naturalWidth > 0);
+    if (!source.includes(`/artwork/${menuArtwork[theme]}.webp`) || !loaded) menuFailures.push(theme);
   }
-  check('Every menu theme artwork loads', failedArtwork.length === 0);
+  check('Every menu theme shows its artwork', menuFailures.length === 0 && failedArtwork.length === 0);
   await page.keyboard.press('Escape');
   await page.waitForTimeout(150);
   check(
