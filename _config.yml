@@ -1,0 +1,17 @@
+exclude:
+  - .github
+  - src
+  - scripts
+  - docs
+  - public
+  - artwork-persona
+  - artwork-originals
+  - node_modules
+  - qa-artifacts
+  - package.json
+  - package-lock.json
+  - vite.config.js
+  - README.md
+  - QA.md
+  - ASSETS.md
+  - alex_sekunau_portfolio_prompt_v2.md

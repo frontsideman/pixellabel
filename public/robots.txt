@@ -1,4 +1,17 @@
 User-agent: *
 Allow: /
+Disallow: /src/
+Disallow: /docs/
+Disallow: /scripts/
+Disallow: /public/
+Disallow: /artwork-persona/
+Disallow: /artwork-originals/
+Disallow: /README.md
+Disallow: /QA.md
+Disallow: /ASSETS.md
+Disallow: /alex_sekunau_portfolio_prompt_v2.md
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /vite.config.js
 
 Sitemap: https://pixellabel.com/sitemap.xml
