@@ -1,0 +1,33 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build published artifacts
+        run: npm run build
+
+      - name: Verify generated files are committed
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain)"
