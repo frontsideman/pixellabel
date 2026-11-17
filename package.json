@@ -9,10 +9,12 @@
     "preview": "vite preview --host 0.0.0.0",
     "qa": "node scripts/qa.mjs",
     "qa:polish": "node scripts/qa-polish.mjs",
+    "qa:a11y": "node scripts/qa-a11y.mjs",
     "format": "prettier --write src/styles/*.css",
     "qa:review": "node scripts/qa-review.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "playwright": "^1.64.0",
     "prettier": "^3.9.10",
     "vite": "^8.3.4"

@@ -5,12 +5,13 @@ import assert from 'node:assert/strict';
 const url = process.env.QA_URL || 'http://localhost:4173/';
 const localChrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const browser = await chromium.launch({ headless: true, ...(existsSync(localChrome) ? { executablePath: localChrome } : {}) });
-const results = [], errors = [], failedAssets = [];
+const results = [], errors = [], failedAssets = [], yandexRequests = [];
 await mkdir('qa-artifacts', { recursive: true });
 const check = (name, value) => { assert.ok(value, name); results.push({ check: name, passed: true }); };
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const page = await context.newPage();
 page.on('pageerror', e => errors.push(e.message));
+page.on('request', request => { if(/mc\.yandex\.ru|yandex\.ru\/metrika/.test(request.url())) yandexRequests.push(request.url()); });
 page.on('response', response => { if(response.status()>=400 && new URL(response.url()).origin===new URL(url).origin) failedAssets.push(`${response.status()} ${response.url()}`); });
 await page.addInitScript(() => {
   window.qaMetrics={cls:0,lcp:0};
@@ -46,6 +47,21 @@ try {
   for(let i=0;i<projectCount-1 && !(await page.locator('[data-project-next]').isDisabled());i++) { await page.locator('[data-project-next]').click(); await page.waitForTimeout(750); }
   check('Panorama reaches the final project', (await page.locator('.project-count').textContent()).trim()===`5.${projectCount} / 5.${projectCount}`);
   check('Last project is visible', await page.locator('[data-project="auto"]').evaluate(e=>{const r=e.getBoundingClientRect();return r.right<=innerWidth+1 && r.left>=0;}));
+  const shortContext = await browser.newContext({ viewport: { width: 1920, height: 600 } });
+  const shortPage = await shortContext.newPage();
+  await shortPage.goto(url, { waitUntil: 'networkidle' });
+  await shortPage.waitForTimeout(500);
+  const shortProjects = await shortPage.locator('#projects').evaluate(section => ({
+    top: section.getBoundingClientRect().top + scrollY,
+    distance: section.querySelector('.project-track').scrollWidth - section.querySelector('.project-viewport').clientWidth
+  }));
+  await shortPage.evaluate(({ top, distance }) => scrollTo({ top: top + distance, behavior: 'instant' }), shortProjects);
+  await shortPage.waitForTimeout(300);
+  check('Last project fits a 1920×600 desktop viewport', await shortPage.locator('[data-project="auto"]').evaluate(element => {
+    const rect = element.getBoundingClientRect();
+    return rect.top >= 0 && rect.bottom <= innerHeight + 1 && rect.left >= 0 && rect.right <= innerWidth + 1;
+  }));
+  await shortContext.close();
   await page.locator('[data-project="auto"] .project-open').click();
   check('Project detail dialog opens with correct content', await page.locator('#project-dialog').evaluate(e=>e.open) && (await page.locator('#project-dialog-title').textContent())==='BestAutoService.by');
   await page.keyboard.press('Escape');
@@ -86,14 +102,24 @@ try {
   const blocked=await browser.newContext();const imagefree=await blocked.newPage();await imagefree.route('**/*.{webp,png,svg}',route=>route.abort());await imagefree.goto(url);
   check('Artwork failure leaves semantic content and contacts usable', await imagefree.locator('h1').isVisible() && await imagefree.locator('#contact .button').getAttribute('href')==='https://t.me/Frontend_React_Vue');await blocked.close();
   check('No runtime errors or failed local assets', errors.length===0 && failedAssets.length===0);
-  check('CV timeline contains eight verified roles', await page.locator('.career-stop').count()===8 && await page.locator('.career').textContent().then(text=>['EPAM Systems','Upwork','ElligintHealth','Frontend Team Lead','Oct 2013'].every(value=>text.includes(value))));
+  check('Analytics is not loaded on the QA host', yandexRequests.length===0);
+  check('CV timeline contains nine verified roles', await page.locator('.career-stop').count()===9 && await page.locator('.career').textContent().then(text=>['BiXBiT','EPAM Systems','Upwork','ElligintHealth','Frontend Team Lead','Oct 2013'].every(value=>text.includes(value))));
+  check('Career company and project links use official destinations', await page.locator('.career a').evaluateAll(links => {
+    const hrefs = links.map(link => link.href);
+    return ['https://bixbit.io/en','https://elliginthealth.com/','https://itrexgroup.com/','https://www.intelycx.com/','https://goconsensus.com/','https://spiralscout.com/','https://www.upwork.com/','https://www.effectivesoft.ai/','https://www.theaccessgroup.com/en-gb/our-brands/abintegro/','https://www.godeltech.com/','https://www.epam.com/','https://www.comparethemarket.com/','https://www.modix.eu/','https://moscow.megafon.ru/'].every(href => hrefs.includes(href));
+  }));
+  check('Career links distinguish companies from projects', await page.locator('.career-stop h3 a').evaluateAll(links => links.every(link => getComputedStyle(link).textDecorationLine === 'none')) && await page.locator('.career-stop > p a').evaluateAll(links => links.length >= 5 && links.every(link => getComputedStyle(link).textDecorationLine === 'underline')));
+  check('AIBook card links to its repository', await page.locator('[data-project="aibook"] .project-source').getAttribute('href')==='https://github.com/frontsideman/aibook');
   check('Public contact channels are present', await page.locator('#contact a[href="https://t.me/Frontend_React_Vue"]').count()===2 && await page.locator('#contact a[href="https://www.linkedin.com/in/alexandr-sekunov/"]').count()===1);
   const mobileContext=await browser.newContext({reducedMotion:'reduce',viewport:{width:375,height:812}});
   const mobile=await mobileContext.newPage();await mobile.goto(url,{waitUntil:'networkidle'});
   for(const [key,title] of [['allergenchecker','AllergenChecker'],['competition','Competition'],['aibook','AIBook'],['auto','BestAutoService.by']]) {
-    await mobile.locator(`[data-project="${key}"] .project-open`).click();
+    const card = mobile.locator(`[data-project="${key}"]`);
+    await card.locator('.project-open').click();
     check(`Mobile details open for ${title}`, (await mobile.locator('#project-dialog-title').textContent())===title && await mobile.locator('#project-dialog').evaluate(e=>e.open));
+    check(`Dialog category matches ${title}`, (await mobile.locator('.dialog-category').textContent())===await card.getAttribute('data-category'));
     if(key==='allergenchecker') check('AllergenChecker includes barcode and ingredient-photo functionality', await mobile.locator('.dialog-description').textContent().then(text=>text.includes('barcode')&&text.includes('photograph')));
+    if(key==='aibook') check('AIBook dialog describes custom fairy tales', await mobile.locator('.dialog-description').textContent().then(text=>text.includes('custom fairy tales')&&text.includes('moral lessons')&&text.includes('shape the plot')));
     await mobile.keyboard.press('Escape');
   }
   await mobileContext.close();

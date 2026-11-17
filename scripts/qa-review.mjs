@@ -150,6 +150,18 @@ try {
       (await sitemap.text()).includes("<loc>https://pixellabel.com/</loc>"),
       "sitemap lists the canonical URL",
     );
+    const privacy = await page.request.get(origin + "/privacy.html");
+    assert.equal(privacy.status(), 200, "privacy page");
+    assert(
+      (await privacy.text()).includes("Privacy notice"),
+      "privacy page has content",
+    );
+    const notFound = await page.request.get(origin + "/404.html");
+    assert.equal(notFound.status(), 200, "404 page");
+    assert(
+      (await notFound.text()).includes("Page not found"),
+      "404 page has content",
+    );
     // Crawlers download the whole document, so the published entry must stay small.
     const entry = await page.request.get(origin + "/");
     const entryHtml = await entry.text();
@@ -202,7 +214,7 @@ try {
       );
     }
     console.log(
-      `${origin}: full social metadata, structured data, sitemap/robots, lightweight entry, 7 published root assets, service semantics and readable responsive type passed`,
+      `${origin}: full social metadata, structured data, sitemap/robots, privacy/404 pages, lightweight entry, published root assets, service semantics and readable responsive type passed`,
     );
   }
   for (const total of [0, 1]) {

@@ -47,15 +47,16 @@ try {
   const triggers = page.locator('.project-open');
   check(
     'Project triggers expose concise dialog semantics',
-    await triggers.evaluateAll(buttons =>
-      buttons.length > 0 &&
-      buttons.every(button => {
-        const label = button.getAttribute('aria-label') || '';
+    await triggers.evaluateAll(elements =>
+      elements.length > 0 &&
+      elements.every(element => {
+        const label = element.getAttribute('aria-label') || '';
         return (
-          button.getAttribute('type') === 'button' &&
-          button.getAttribute('aria-haspopup') === 'dialog' &&
-          button.getAttribute('aria-controls') === 'project-dialog' &&
-          button.getAttribute('aria-expanded') === 'false' &&
+          element.matches('a.project-open') &&
+          element.getAttribute('href') === '#projects' &&
+          element.getAttribute('aria-haspopup') === 'dialog' &&
+          element.getAttribute('aria-controls') === 'project-dialog' &&
+          element.getAttribute('aria-expanded') === 'false' &&
           label.length > 10 &&
           label.length < 80
         );
@@ -63,6 +64,7 @@ try {
     ),
   );
   const firstTrigger = triggers.first();
+  const hashBefore = await page.evaluate(() => location.hash);
   await firstTrigger.click();
   await page.waitForTimeout(200);
   check(
@@ -75,6 +77,16 @@ try {
     'Project trigger clears aria-expanded on close',
     (await firstTrigger.getAttribute('aria-expanded')) === 'false',
   );
+  await firstTrigger.focus();
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(200);
+  check(
+    'Project trigger opens from the keyboard without changing the URL',
+    (await page.locator('#project-dialog').evaluate(dialog => dialog.open)) &&
+      (await page.evaluate(() => location.hash)) === hashBefore,
+  );
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(200);
 
   const menuToggle = page.locator('.menu-toggle');
   await menuToggle.click();
