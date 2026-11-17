@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13151a">
+  <title>Privacy | Alex Sekunau</title>
+  <meta name="description" content="Privacy notice for pixellabel.com: analytics, hosting logs, local preferences and contact channels.">
+  <meta name="author" content="Aliaksandr Sekunau">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pixellabel.com/privacy.html">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" href="./favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180">
+  <style>
+    :root { color-scheme: dark; --ink: #13151a; --cream: #f7ebc9; --yellow: #ffda77; --pink: #ef579b; }
+    * { box-sizing: border-box; }
+    html { background: var(--ink); }
+    body {
+      margin: 0;
+      padding: clamp(24px, 6vw, 80px) 24px;
+      background: var(--ink);
+      color: var(--cream);
+      font: 16px/1.65 "DM Sans", Arial, sans-serif;
+    }
+    main { width: min(760px, 100%); margin: 0 auto; }
+    a { color: var(--yellow); text-underline-offset: 3px; }
+    a:hover { color: var(--cream); }
+    .back { display: inline-block; margin-bottom: 56px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-decoration: none; text-transform: uppercase; }
+    .eyebrow { margin: 0 0 14px; color: var(--pink); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2 { font-family: "Arial Narrow", Impact, sans-serif; font-weight: 400; line-height: 1.05; text-transform: uppercase; letter-spacing: -.015em; }
+    h1 { margin: 0 0 12px; font-size: clamp(54px, 10vw, 96px); }
+    h2 { margin: 44px 0 12px; font-size: clamp(24px, 4vw, 34px); }
+    p, ul { max-width: 68ch; }
+    ul { padding-left: 22px; }
+    li + li { margin-top: 10px; }
+    .updated { margin: 0 0 42px; color: #c1bcb0; font-size: 13px; }
+    .note { border-left: 3px solid var(--yellow); padding: 2px 0 2px 18px; color: #e4e1d0; }
+    footer { margin-top: 60px; padding-top: 22px; border-top: 1px solid #f7ebc933; color: #c1bcb0; font-size: 12px; }
+    :focus-visible { outline: 3px solid var(--cream); outline-offset: 4px; }
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="./">← Alex Sekunau</a>
+  <p class="eyebrow">Privacy</p>
+  <h1>Privacy notice</h1>
+  <p class="updated">Last updated: 17 November 2026</p>
+
+  <p>This page explains what happens with information when you visit <strong>pixellabel.com</strong>. It is a static portfolio: there are no accounts, contact forms or payments.</p>
+
+  <h2>Who is responsible</h2>
+  <p>The site is maintained by Aliaksandr Sekunau. For privacy questions, contact me via <a href="https://t.me/Frontend_React_Vue" target="_blank" rel="noopener noreferrer">Telegram</a> or <a href="https://www.linkedin.com/in/alexandr-sekunov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+  <h2>What is collected</h2>
+  <ul>
+    <li><strong>Analytics.</strong> The site uses Yandex Metrica, a web analytics service provided by Yandex. It may set cookies and collect the page URL, referrer, browser and device details, approximate location derived from the IP address, and interaction events such as clicks and scrolling. I use this information only to understand how the portfolio is used and to improve it.</li>
+    <li><strong>Hosting.</strong> The site is served by GitHub Pages. GitHub may process request data, including IP addresses, as part of providing and securing the hosting service.</li>
+    <li><strong>Local preferences.</strong> The site stores two small preferences in your browser: <code>portfolio-motion-v2</code> (local storage, remembers the reduced-motion choice) and <code>portfolio-visited</code> (session storage, prevents the intro from replaying in the same tab). They are not sent to me.</li>
+    <li><strong>Messages.</strong> If you contact me through Telegram or LinkedIn, the conversation is handled by that platform under its own privacy policy.</li>
+  </ul>
+
+  <h2>Cookies and choices</h2>
+  <p>Yandex Metrica may set analytics cookies. You can block or delete cookies in your browser settings. Yandex also provides an <a href="https://yandex.com/support/metrica/general/opt-out.html" target="_blank" rel="noopener noreferrer">opt-out mechanism</a>. If you are in a region where analytics requires prior consent, please use your browser controls or the Yandex opt-out before continuing to browse.</p>
+
+  <h2>Retention and sharing</h2>
+  <p>Analytics data is retained according to Yandex Metrica's settings and policies. I do not sell personal information. Data may be processed by Yandex and GitHub as service providers described above.</p>
+
+  <h2>Your rights</h2>
+  <p>Depending on where you live, you may have the right to request access to, correction of, or deletion of personal information, or to object to its processing. Contact me through one of the channels above. You can also complain to your local data-protection authority.</p>
+
+  <h2>Changes</h2>
+  <p>If this notice changes, the updated date at the top of the page will change too.</p>
+
+  <footer>
+    <p>© <span id="year">2026</span> Alex Sekunau · <a href="./">Back to the portfolio</a></p>
+  </footer>
+</main>
+<script>document.querySelector('#year').textContent = String(new Date().getFullYear());</script>
+</body>
+</html>

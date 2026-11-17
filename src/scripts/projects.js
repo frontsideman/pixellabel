@@ -1,10 +1,10 @@
 import { lockScroll, unlockScroll } from './scroll-lock.js';
 
 const projects = {
-  allergenchecker: { title: 'AllergenChecker', category: '5.1 / iOS application', asset: 'allergenchecker', description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
-  competition: { title: 'Competition', category: '5.2 / iOS application', asset: 'competitions', description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
-  aibook: { title: 'AIBook', category: '5.3 / Product development', asset: 'aibook', description: 'Product development for AIBook.', stack: ['Product development'] },
-  auto: { title: 'BestAutoService.by', category: '5.4 / Business website', asset: 'auto', description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'], url: 'https://bestautoservice.by/' }
+  allergenchecker: { description: 'Created an iOS application that helps identify allergens in food products using a barcode scan or a photograph of the product ingredient list.', stack: ['iOS', 'Barcode scanning', 'Ingredient photos'] },
+  competition: { description: 'Created Competition, an iOS application for goal-based competitions in private groups. Members compete on activity, reading, step counts and other goals supported by the Apple ecosystem, using their iPhone and Apple Watch.', stack: ['iOS', 'SwiftUI', 'Apple Watch', 'Nuxt', 'Directus'] },
+  aibook: { description: 'AIBook is a service that generates custom fairy tales based on existing stories, so you can add moral lessons or shape the plot.', stack: ['Product development'] },
+  auto: { description: 'WordPress website for BestAutoService.by, an automotive service business. Work included website development, design, content creation and SEO.', stack: ['WordPress', 'SEO', 'Content', 'Design', 'MCP'] }
 };
 export class HorizontalProjects {
   constructor(preferences) {
@@ -79,7 +79,8 @@ export class HorizontalProjects {
   setIndex(index, progress) {
     const total = this.cards.length;
     this.index = total ? Math.max(0, Math.min(total - 1, index)) : 0;
-    const text = `5.${total ? this.index + 1 : 0} / 5.${total}`;
+    const prefix = this.section.dataset.sectionNumber || '5';
+    const text = `${prefix}.${total ? this.index + 1 : 0} / ${prefix}.${total}`;
     if(this.count.textContent !== text) this.count.textContent = text;
     this.previous.disabled = !total || this.index === 0;
     this.next.disabled = !total || this.index === total - 1;
@@ -99,18 +100,22 @@ export class HorizontalProjects {
 export function setupProjectDialogs() {
   const dialog = document.querySelector('#project-dialog');
   let returnFocus, activeTrigger;
-  document.querySelectorAll('.project-open').forEach(button => button.addEventListener('click', () => {
-    const data = projects[button.closest('[data-project]').dataset.project];
-    returnFocus = activeTrigger = button;
-    button.setAttribute('aria-expanded', 'true');
-    dialog.querySelector('#project-dialog-title').textContent = data.title;
-    dialog.querySelector('.dialog-category').textContent = data.category;
+  document.querySelectorAll('.project-open').forEach(trigger => trigger.addEventListener('click', event => {
+    event.preventDefault();
+    const card = trigger.closest('[data-project]');
+    const data = projects[card.dataset.project];
+    if (!data) return;
+    returnFocus = activeTrigger = trigger;
+    trigger.setAttribute('aria-expanded', 'true');
+    dialog.querySelector('#project-dialog-title').textContent = card.querySelector('h3').textContent.trim();
+    dialog.querySelector('.dialog-category').textContent = card.dataset.category || '';
     dialog.querySelector('.dialog-description').textContent = data.description;
-    dialog.querySelector('.dialog-art').src = `${import.meta.env.BASE_URL}artwork/${data.asset}.webp`;
+    dialog.querySelector('.dialog-art').src = `${import.meta.env.BASE_URL}artwork/${card.dataset.asset}.webp`;
     dialog.querySelector('.dialog-tags').replaceChildren(...data.stack.map(tag => { const span = document.createElement('span'); span.textContent = tag; return span; }));
     const visit = dialog.querySelector('.dialog-visit');
-    visit.hidden = !data.url;
-    if (data.url) visit.href = data.url;
+    const url = card.dataset.url;
+    visit.hidden = !url;
+    if (url) visit.href = url;
     else visit.removeAttribute('href');
     dialog.showModal();
     lockScroll(dialog);

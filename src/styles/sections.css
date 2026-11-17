@@ -1,7 +1,5 @@
 /* Page scenes, cards, dialogs and content. */
 .hero {
-  height: clamp(700px, 59vw, 1020px);
-  min-height: 700px;
   background: #552e62;
   isolation: isolate;
 }
@@ -391,8 +389,6 @@
 }
 .skill-groups {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
   align-self: start;
   margin-top: 52px;
 }
@@ -650,6 +646,7 @@
 .project-card {
   width: clamp(265px, 26vw, 430px);
   background: #11171a;
+  color: var(--cream);
   border: 2px solid #182425;
   box-shadow: 4px 5px 0 #631d6240;
   border-radius: 4px;
@@ -667,16 +664,21 @@
 .project-card:focus-within {
   border-color: var(--cream);
 }
+/* Stretched link: card text stays outside the interactive element, while the link covers the card. */
 .project-open {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   background: transparent;
-  text-align: left;
   padding: 0;
-  width: 100%;
-  display: block;
-  color: var(--cream);
+  border-radius: inherit;
+  color: transparent;
+}
+.project-open:focus-visible {
+  outline-offset: -3px;
 }
 .project-image {
-  height: clamp(215px, 20vw, 335px);
+  height: clamp(180px, min(20vw, 35vh), 335px);
   position: relative;
   overflow: hidden;
 }
@@ -688,8 +690,8 @@
     transform var(--motion-duration),
     filter var(--motion-duration);
 }
-.project-open:hover .project-image img,
-.project-open:focus-visible .project-image img {
+.project-card:hover .project-image img,
+.project-card:focus-within .project-image img {
   transform: scale(1.045);
   filter: saturate(1.1);
 }
@@ -720,14 +722,35 @@
     opacity var(--motion-duration),
     transform var(--motion-duration);
 }
-.project-open:hover .image-action,
-.project-open:focus-visible .image-action {
+.project-card:hover .image-action,
+.project-card:focus-within .image-action {
   transform: translateY(0);
   opacity: 1;
 }
 .project-meta {
   padding: 20px 17px 22px;
   position: relative;
+}
+.project-source {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  margin-top: 10px;
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--motion-duration);
+}
+.project-source:hover,
+.project-source:focus-visible {
+  color: var(--yellow);
 }
 .project-meta h3 {
   font-size: 21px;
@@ -881,8 +904,8 @@
 .career-stop {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 30px;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.55fr);
+  gap: 18px;
   padding-left: 27px;
   min-height: 68px;
   transition: opacity var(--motion-duration);
@@ -922,7 +945,22 @@
 .career-stop > p {
   align-self: center;
   color: #e4e1d0;
-  max-width: 290px;
+  max-width: 460px;
+}
+.career a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--motion-duration);
+}
+.career a:hover,
+.career a:focus-visible {
+  color: var(--yellow);
+}
+.career-stop > p a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .services {
   display: grid;
@@ -1156,6 +1194,19 @@
 .site-footer button[aria-pressed="true"] {
   background: var(--cream);
   color: var(--ink);
+}
+.site-footer .footer-privacy {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  opacity: 0.75;
+}
+.site-footer .footer-privacy:hover {
+  opacity: 1;
 }
 .back-top {
   width: 40px;
