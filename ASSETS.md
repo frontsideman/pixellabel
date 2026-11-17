@@ -1,5 +1,7 @@
 # Asset inventory
 
+`artwork-originals/`, `artwork-persona/`, `docs/reference/` and the unmodified generation sources are kept in the repository for reference but excluded from the published GitHub Pages site by `_config.yml`. Only the exported files under `public/` and the generated root asset folders are public.
+
 llama.cpp uses the unmodified light icon from [ggml-org/llama.brand](https://github.com/ggml-org/llama.brand/blob/master/icon/icon-light.svg), the official brand asset repository. Assets are licensed under CC BY-NC 4.0; its [brand usage permission](https://github.com/ggml-org/llama.brand/blob/master/BRAND-USAGE.md) allows use to identify llama.cpp, including commercially.
 
 AI tools: Gemini, OpenCode, MCP and GitHub Copilot marks come from the installed Simple Icons package, as does Firebase. Codex uses the light app icon bundled in `/Applications/ChatGPT.app/Contents/Resources/icon-codex-light.png`, resized to 128px and embedded within its local SVG. These SVGs are hosted locally and embedded in standalone exports.
@@ -42,7 +44,7 @@ Hero art is split into a clean city background and a transparent car/character f
 
 ## Fonts and interface graphics
 
-Anton (display), DM Sans (body) and Caveat (script) were downloaded from Google Fonts, Latin-subset and exported to locally hosted WOFF2. DM Sans and Caveat are variable fonts: DM Sans covers weights 100–1000 and Caveat 400–700; Anton remains a single 400 weight. The WOFF2 files live in `src/fonts/`, and the full SIL Open Font License notices are included in `public/fonts`. No trademarked game font is used. Technology marks are locally hosted SVGs from Simple Icons (CC0), the official Pinia website, the official TanStack brand assets, and Devicon (MIT) for AWS. Vuex uses the Vue mark and SwiftUI uses the Swift mark. HTML and CSS have separate logos. Service icons are Lucide SVGs (ISC); license notices are included in public/icons. The favicon, interface geometry, GitHub mark and grain texture are vectors.
+Anton (display), DM Sans (body) and Caveat (script) were downloaded from Google Fonts, Latin-subset and exported to locally hosted WOFF2. DM Sans and Caveat are variable fonts: DM Sans covers weights 100–1000 and Caveat covers 400–700; Anton remains a single 400 weight. The WOFF2 files live in `src/fonts/`, and the full SIL Open Font License notices are included in `public/fonts`. No trademarked game font is used. Technology marks are locally hosted SVGs from Simple Icons (CC0), the official Pinia website, and Devicon (MIT) for AWS. Vuex uses the Vue mark and SwiftUI uses the Swift mark. HTML and CSS have separate logos. Service icons are Lucide SVGs (ISC); license notices are included in public/icons. The favicon, interface geometry, GitHub mark and grain texture are vectors.
 
 ## Generation sources
 
@@ -59,7 +61,7 @@ No essential copy is baked into imagery. Responsive picture sources, image dimen
 
 - Simple Icons: npm `simple-icons`, SVG paths and brand colors; https://simpleicons.org/
 - Pinia: https://pinia.vuejs.org/logo.svg
-- TanStack: https://tanstack.com/images/brand/social/naked-mark-ocean.svg
+- TanStack: Simple Icons (CC0), current mark; https://simpleicons.org/
 - AWS: https://github.com/devicons/devicon/blob/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg
 - Service icons: npm `lucide-static` (`code-xml`, `panels-top-left`, `network`, `users-round`, `rocket`, `gauge`), https://lucide.dev/
 

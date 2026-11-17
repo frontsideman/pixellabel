@@ -1,4 +1,25 @@
-# Verification — 26 October 2026
+# Verification — current state (17 November 2026)
+
+The current implementation builds with `npm run build`, serves with `npm run preview`, and passes the checks below with no uncaught JavaScript errors or failed local asset responses.
+
+- `npm run qa` passes 56 checks including the 60-second ambient-continuity check; `QA_IDLE_SECONDS=0 npm run qa` passes the 55 content checks without that benchmark.
+- The Experience timeline has nine entries, starting with the current BiXBiT role. Company names link to their official sites without underlines; project names are underlined links to their official sites. The AIBook card links to its GitHub repository and its dialog describes the custom fairy-tale generation service.
+- The pinned projects panorama keeps the final card fully inside a 1920×600 desktop viewport; card imagery scales down on short viewports instead of requiring the section to scroll upward first.
+- `npm run qa:polish` passes 29 checks.
+- `npm run qa:a11y` runs axe-core on the home page, navigation dialog, project dialog and privacy page; no violations in the selected WCAG A/AA tags, with `color-contrast` intentionally disabled.
+- `npm run qa:review` passes against both the dev server (5173) and production preview (4173).
+- Project cards are stretched `<a class="project-open">` links; the dialog title and category are read from the card, while descriptions and stacks remain in `src/scripts/projects.js`.
+- The page includes `privacy.html` and a footer Privacy link. Yandex Metrica is skipped on file, local and private-network hosts; the no-JS Metrica pixel was removed.
+- GitHub Pages publishes the repository root, with `_config.yml` excluding source, tooling, internal docs and original artwork. The `verify` Action only checks that `npm run build` leaves generated root files unchanged.
+- The published entry stays lightweight (about 43 KB); the standalone `portfolio.html` is about 7.5 MB and remains `noindex`.
+
+Current limits: browser checks use local Chromium only; no physical iOS/Android or manual assistive-technology audit; axe color-contrast is disabled by product decision; the privacy notice is a product text, not legal advice; GitHub Pages exclusions are applied by Jekyll and cannot be reproduced by the local Vite preview.
+
+---
+
+# Verification log — starting 26 October 2026 (historical)
+
+> The entries below are a chronological log. They may describe earlier card counts, project sets, redirects, deployment states or check totals. Use the current-state section above for the current implementation.
 
 Production output built successfully with `npm run build`, and served successfully with `npm run preview`. The local development server also runs successfully. npm installation completed; no vulnerable dependencies were reported by npm at installation time.
 
@@ -41,14 +62,14 @@ Mobile performance improved from an initial 74 after reducing eager overlay down
 ## Limits
 
 - Tested in local Chromium; no physical iOS/Android or Safari/Firefox verification, prolonged battery test, 120 Hz device test or assistive-technology manual audit.
-- Dates and roles now match the supplied CV, including EPAM, Godel, EffectiveSoft, Upwork, SpiralScout, ITRex, ElligintHealth and the restaurant platform under NDA. Telegram, LinkedIn and GitHub destinations are verified. Permanent location and availability are still unspecified. BestAutoService.by has a public website link supplied by the owner; other public project-launch URLs remain unspecified.
+- Dates and roles now match the supplied CV and owner updates, including BiXBiT, EPAM, Godel, EffectiveSoft, Upwork, SpiralScout, ITRex, ElligintHealth and the restaurant platform under NDA. Company and project names link to their official sites where supplied. Telegram, LinkedIn and GitHub destinations are verified. Permanent location and availability are still unspecified. BestAutoService.by has a public website link supplied by the owner; other public project-launch URLs remain unspecified.
 - Illustrations are original concepts, not screenshots of the products. The supplied CodePen uses scroll-driven list brightening; heading proximity motion here is an original adaptation of the brief's separate hover requirement.
 - Skyline/road artwork shares one background plate; character and vehicle share one transparent foreground. See ASSETS.md for exact layer inventory.
-- No public deployment/domain was configured. The ready-to-host static output is `dist/`.
+- Deployment: GitHub Pages serves the repository root; `_config.yml` excludes internal paths while keeping them in the repository. The ready-to-host output is also in `dist/`.
 
 ## CV and project update
 
-- Eight project cards, a dynamic counter and proportional progress indicator; the final card remains reachable on desktop and mobile.
+- Four project cards (the current set; earlier iterations had eight), a dynamic counter and proportional progress indicator; the final card remains reachable on desktop and mobile.
 - Added AllergenChecker, AIBook and the corporate/marketing website with a blog on Nuxt + Directus; updated the existing Competition card to the user’s singular product name and iOS platform.
 - Verified that AllergenChecker’s description includes barcode scans and ingredient-list photographs. No accuracy, safety or medical-outcome claim is added.
 - All four added/updated project dialogs were tested at 375px with reduced motion.
@@ -162,7 +183,7 @@ Removed Redis from Skills and its wide tape, moved SCSS to Frontend, and added a
 
 ### Own Projects selection
 
-Removed Consensus, Corporate & marketing website, Bixbit and YouTube Skip from the project cards and dialog data. The section is now Own Projects with AllergenChecker, Competition, AIBook and BestAutoService.by numbered 01–04. Concept artwork remains where used by service previews. The mobile dialog check now covers BestAutoService.by instead of the removed corporate entry. Production standalone build, targeted card/order/numbering checks and all 45 browser checks passed without runtime errors or failed assets.
+Removed Consensus, Corporate & marketing website, BiXBiT and YouTube Skip from the project cards and dialog data. The section is now Own Projects with AllergenChecker, Competition, AIBook and BestAutoService.by numbered 01–04. Concept artwork remains where used by service previews. The mobile dialog check now covers BestAutoService.by instead of the removed corporate entry. Production standalone build, targeted card/order/numbering checks and all 45 browser checks passed without runtime errors or failed assets.
 
 ### Social metadata and indexation
 
